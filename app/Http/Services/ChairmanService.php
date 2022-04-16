@@ -34,7 +34,7 @@ trait ChairmanService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/Chairman'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $updatableData = $request->toArray();
+            $updatableData = $request->validated();
             $updatableData["pro_image"] = "image";
             $updatableData["sign_image"] = "image";
             $data['data'] = tap(Chairman::where(["id" =>  $request["id"]]))->update(

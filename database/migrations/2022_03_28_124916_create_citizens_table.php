@@ -32,7 +32,7 @@ class CreateCitizensTable extends Migration
             $table->string("guardian");
             $table->string("c_mother_name");
             $table->string("nid_no");
-            $table->boolean("is_tubewell");
+            $table->string("is_tubewell");
             $table->string("latrin_type");
             $table->string("type_of_living");
             $table->string("type_of_organization");
@@ -41,9 +41,9 @@ class CreateCitizensTable extends Migration
             $table->integer("male");
             $table->integer("female");
             $table->float("annual_price");
-            $table->integer("gov_advantage");
+            $table->string("gov_advantage");
             $table->string("image");
-            $table->date("current_year");
+            $table->string("current_year");
             $table->float("raw_house");
             $table->float("half_building_house");
             $table->float("building_house");

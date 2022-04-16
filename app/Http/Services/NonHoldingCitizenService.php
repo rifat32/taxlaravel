@@ -46,7 +46,7 @@ trait NonHoldingCitizenService
                     "nid",
                     "mobile",
                     "parmanent_address",
-                    "type",
+                    "occupation_type",
                     "current_year",
                     "tax_amount",
                     "previous_due",

@@ -24,30 +24,29 @@ class NonHoldingCitizenRequest extends FormRequest
     public function rules()
     {
 
-            return [
+        return [
 
-                "union_id" => "required",
-                "ward_id"      =>"required",
-                "village_id"      =>"required",
-                "post_office_id"      =>"required",
-                "upazila_id"      =>"required",
-                "district_id"      =>"required",
+            "union_id" => "required",
+            "ward_id"      => "required",
+            "village_id"      => "required",
+            "post_office_id"      => "required",
+            "upazila_id"      => "required",
+            "district_id"      => "required",
 
-        "institute_name" =>"required",
-        "business_address" =>"required",
-        "license_no" =>"required",
-        "license_user_name" =>"required",
-        "guardian",
-        "mother_name" =>"required",
-        "nid" =>"required",
-        "mobile" =>"required",
-        "parmanent_address" =>"required",
-        "type" =>"required",
-        "current_year" =>"required",
-        "tax_amount" =>"required|numeric",
-        "previous_due" =>"required|numeric",
-        "holding_no" =>"required",
-                ];
-
+            "institute_name" => "required",
+            "business_address" => "required",
+            "license_no" => "required",
+            "license_user_name" => "required",
+            "guardian"=>"required",
+            "mother_name" => "required",
+            "nid" => "required",
+            "mobile" => "required",
+            "parmanent_address" => "required",
+            "occupation_type" => "required",
+            "current_year" => "required",
+            "tax_amount" => "required|numeric",
+            "previous_due" => "required|numeric",
+            "holding_no" => "required",
+        ];
     }
 }

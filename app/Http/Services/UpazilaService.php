@@ -52,6 +52,17 @@ trait UpazilaService
         }
 
     }
+
+    public function getUpazilaByUnionService($unionId,$request)
+    {
+
+        try{
+            $data['data'] =   Upazila::with("union")->where(["union_id" => $unionId])->get();
+            return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+    }
     public function getUpazilaByIdService($id,$request)
     {
 

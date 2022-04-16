@@ -10,7 +10,7 @@ class NonHoldingCitizen extends Model
 {
 
     use HasFactory,SoftDeletes;
-  
+
     protected $fillable = [
         "union_id",
         "ward_id",
@@ -28,7 +28,7 @@ class NonHoldingCitizen extends Model
         "nid",
         "mobile",
         "parmanent_address",
-        "type",
+        "occupation_type",
         "current_year",
         "tax_amount",
         "previous_due",

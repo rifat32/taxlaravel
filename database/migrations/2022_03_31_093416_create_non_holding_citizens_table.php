@@ -33,7 +33,7 @@ class CreateNonHoldingCitizensTable extends Migration
             $table->string("nid");
             $table->string("mobile");
             $table->string("parmanent_address");
-            $table->string("type");
+            $table->string("occupation_type");
             $table->string("current_year");
             $table->float("tax_amount");
             $table->float("previous_due");

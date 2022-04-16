@@ -24,6 +24,12 @@ class VillageController extends Controller
     {
         return $this->getVillageService($request);
     }
+
+    public function getvillageByWard($wardId,Request $request)
+    {
+
+        return $this->getvillageByWardService($wardId,$request);
+    }
     public function getVillageById($id,Request $request)
     {
 

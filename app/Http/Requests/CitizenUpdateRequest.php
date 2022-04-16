@@ -41,7 +41,7 @@ class CitizenUpdateRequest extends FormRequest
             "guardian"      =>"required",
             "c_mother_name"      =>"required",
             "nid_no"      =>"required",
-            "is_tubewell"      =>"required|boolean",
+            "is_tubewell"      =>"required|string",
             "latrin_type"      =>"required",
             "type_of_living"      =>"required",
             "type_of_organization"      =>"required",
@@ -50,7 +50,7 @@ class CitizenUpdateRequest extends FormRequest
             "male"      =>"required|numeric",
             "female"      =>"required|numeric",
             "annual_price"      =>"required|numeric",
-            "gov_advantage"      =>"required|boolean",
+            "gov_advantage"      =>"required|string",
             // "image"      =>"required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
             "image"      =>"required",
             "current_year"      =>"required",
@@ -67,7 +67,7 @@ class CitizenUpdateRequest extends FormRequest
           "members.*.upazila"      =>"required",
           "members.*.district"      =>"required",
           "members.*.nid"      =>"required",
-          "members.*.image"      =>"required"
+        //   "members.*.image"      =>"required"
 
             ];
     }

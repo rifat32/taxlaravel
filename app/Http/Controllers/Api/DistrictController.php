@@ -24,6 +24,11 @@ class DistrictController extends Controller
     {
         return $this->getDistrictsService($request);
     }
+    public function getAllDistrict(Request $request)
+    {
+        return $this->getAllDistrictsService($request);
+    }
+
     public function getDistrictById($id,Request $request)
     {
 

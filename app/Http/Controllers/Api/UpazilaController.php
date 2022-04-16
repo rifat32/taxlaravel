@@ -24,6 +24,11 @@ class UpazilaController extends Controller
     {
         return $this->getUpazilaService($request);
     }
+    public function getUpazilaByUnion($unionId,Request $request)
+    {
+        return $this->getUpazilaByUnionService($unionId,$request);
+    }
+
     public function getUpazilaById($id,Request $request)
     {
 

@@ -49,6 +49,18 @@ trait DistrictService
         }
 
     }
+    public function getAllDistrictsService($request)
+    {
+
+        try{
+            $data['data'] =   District::get();
+        return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+
+    }
+
     public function getDistrictByIdService($id,$request)
     {
 

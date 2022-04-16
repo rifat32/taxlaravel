@@ -121,7 +121,7 @@ trait CitizenService
                     ->toArray()
             )
 
-                ->with("union", "ward", "village", "postOffice", "upazila", "district", "member")
+                ->with("union", "ward", "village", "postOffice", "upazila", "district", "members")
                 ->first();
             return response()->json($data, 200);
         } catch (Exception $e) {
@@ -132,7 +132,7 @@ trait CitizenService
     {
 
         try {
-            $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district")->paginate(10);
+            $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district","members")->paginate(10);
             return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);

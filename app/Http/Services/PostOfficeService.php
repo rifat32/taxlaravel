@@ -51,6 +51,17 @@ trait PostOfficeService
         }
 
     }
+
+    public function getPostOfficeByWardService($wardId,$request)
+    {
+
+        try{
+            $data['data'] =   PostOffice::where(["ward_id" => $wardId])->get();
+            return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+    }
     public function getPostOfficeByIdService($id,$request)
     {
 

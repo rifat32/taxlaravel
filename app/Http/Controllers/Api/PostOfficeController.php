@@ -24,6 +24,11 @@ class PostOfficeController extends Controller
     {
         return $this->getPostOfficeService($request);
     }
+    public function getPostOfficeByWard($wardId,Request $request)
+    {
+        return $this->getPostOfficeByWardService($wardId,$request);
+    }
+
     public function getPostOfficeById($id,Request $request)
     {
 

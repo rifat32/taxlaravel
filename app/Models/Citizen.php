@@ -50,7 +50,7 @@ class Citizen extends Model
         "upazila_id"=> 'integer',
         "district_id"=> 'integer',
      ];
-     public function member()
+     public function members()
      {
          return $this->hasMany(Member::class, 'citizen_id', 'id');
      }

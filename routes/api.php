@@ -101,6 +101,7 @@ Route::post('/v1.0/villages', [VillageController::class, "createVillage"]);
 Route::put('/v1.0/villages', [VillageController::class, "updateVillage"]);
 Route::get('/v1.0/villages', [VillageController::class, "getVillage"]);
 Route::get('/v1.0/villages/{id}', [VillageController::class, "getVillageById"]);
+Route::get('/v1.0/villages/wards/{wardId}', [VillageController::class, "getvillageByWard"]);
 Route::get('/v1.0/villages/search/{term}', [VillageController::class, "searchVillage"]);
 Route::delete('/v1.0/villages/{id}', [VillageController::class, "deleteVillage"]);
 
@@ -108,9 +109,39 @@ Route::delete('/v1.0/villages/{id}', [VillageController::class, "deleteVillage"]
 Route::post('/v1.0/post-office', [PostOfficeController::class, "createPostOffice"]);
 Route::put('/v1.0/post-office', [PostOfficeController::class, "updatePostOffice"]);
 Route::get('/v1.0/post-office', [PostOfficeController::class, "getPostOffice"]);
+Route::get('/v1.0/post-office/wards/{wardId}', [PostOfficeController::class, "getPostOfficeByWard"]);
 Route::get('/v1.0/post-office/{id}', [PostOfficeController::class, "getPostOfficeById"]);
 Route::get('/v1.0/post-office/search/{term}', [PostOfficeController::class, "searchPostOffice"]);
 Route::delete('/v1.0/post-office/{id}', [PostOfficeController::class, "deletePostOffice"]);
+
+
+// Upazila
+Route::post('/v1.0/upazilas', [UpazilaController::class, "createUpazila"]);
+Route::put('/v1.0/upazilas', [UpazilaController::class, "updateUpazila"]);
+Route::get('/v1.0/upazilas', [UpazilaController::class, "getUpazila"]);
+Route::get('/v1.0/upazilas/unions/{unionId}', [UpazilaController::class, "getUpazilaByUnion"]);
+Route::get('/v1.0/upazilas/{id}', [UpazilaController::class, "getUpazilaById"]);
+Route::get('/v1.0/upazilas/search/{term}', [UpazilaController::class, "searchUpazila"]);
+Route::delete('/v1.0/upazilas/{id}', [UpazilaController::class, "deleteUpazila"]);
+
+
+// District
+Route::post('/v1.0/districts', [DistrictController::class, "createDistrict"]);
+Route::put('/v1.0/districts', [DistrictController::class, "updateDistrict"]);
+Route::get('/v1.0/districts', [DistrictController::class, "getDistrict"]);
+Route::get('/v1.0/districts/all', [DistrictController::class, "getAllDistrict"]);
+Route::get('/v1.0/districts/{id}', [DistrictController::class, "getDistrictById"]);
+Route::get('/v1.0/districts/search/{term}', [DistrictController::class, "searchDistrict"]);
+Route::delete('/v1.0/districts/{id}', [DistrictController::class, "deleteDistrict"]);
+
+// Methods
+Route::post('/v1.0/methods', [MethodController::class, "createMethod"]);
+Route::put('/v1.0/methods', [MethodController::class, "updateMethod"]);
+Route::get('/v1.0/methods', [MethodController::class, "getMethod"]);
+Route::get('/v1.0/methods/{id}', [MethodController::class, "getMethodById"]);
+Route::get('/v1.0/methods/search/{term}', [MethodController::class, "searchMethod"]);
+Route::delete('/v1.0/methods/{id}', [MethodController::class, "deleteMethod"]);
+
 
 // Citizen
 Route::post('/v1.0/citizens', [CitizenController::class, "createCitizen"]);
@@ -129,6 +160,12 @@ Route::get('/v1.0/nonholding-citizens', [NonHoldingCitizenController::class, "ge
 Route::get('/v1.0/nonholding-citizens/{id}', [NonHoldingCitizenController::class, "getCitizenById"]);
 Route::get('/v1.0/nonholding-citizens/search/{term}', [NonHoldingCitizenController::class, "searchCitizen"]);
 Route::delete('/v1.0/nonholding-citizens/{id}', [NonHoldingCitizenController::class, "deleteCitizen"]);
+
+
+
+
+
+
 
 // Chairman
 Route::post('/v1.0/chairmans', [ChairmanController::class, "createChairman"]);
@@ -188,30 +225,7 @@ Route::delete('/v1.0/non-cizen-taxes/{id}', [NonCitizenTaxController::class, "de
 
 
 
-// Upazila
-Route::post('/v1.0/upazilas', [UpazilaController::class, "createUpazila"]);
-Route::put('/v1.0/upazilas', [UpazilaController::class, "updateUpazila"]);
-Route::get('/v1.0/upazilas', [UpazilaController::class, "getUpazila"]);
-Route::get('/v1.0/upazilas/{id}', [UpazilaController::class, "getUpazilaById"]);
-Route::get('/v1.0/upazilas/search/{term}', [UpazilaController::class, "searchUpazila"]);
-Route::delete('/v1.0/upazilas/{id}', [UpazilaController::class, "deleteUpazila"]);
 
-
-// District
-Route::post('/v1.0/districts', [DistrictController::class, "createDistrict"]);
-Route::put('/v1.0/districts', [DistrictController::class, "updateDistrict"]);
-Route::get('/v1.0/districts', [DistrictController::class, "getDistrict"]);
-Route::get('/v1.0/districts/{id}', [DistrictController::class, "getDistrictById"]);
-Route::get('/v1.0/districts/search/{term}', [DistrictController::class, "searchDistrict"]);
-Route::delete('/v1.0/districts/{id}', [DistrictController::class, "deleteDistrict"]);
-
-// Methods
-Route::post('/v1.0/methods', [MethodController::class, "createMethod"]);
-Route::put('/v1.0/methods', [MethodController::class, "updateMethod"]);
-Route::get('/v1.0/methods', [MethodController::class, "getMethod"]);
-Route::get('/v1.0/methods/{id}', [MethodController::class, "getMethodById"]);
-Route::get('/v1.0/methods/search/{term}', [MethodController::class, "searchMethod"]);
-Route::delete('/v1.0/methods/{id}', [MethodController::class, "deleteMethod"]);
 
 
 
