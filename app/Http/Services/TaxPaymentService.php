@@ -16,7 +16,7 @@ trait TaxPaymentService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/TaxPayment'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $insertableData = $request->toArray();
+            $insertableData = $request->validated();
             $data['data'] =   TaxPayment::create($insertableData);
 
             return response()->json($data, 201);
@@ -32,7 +32,7 @@ trait TaxPaymentService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/TaxPayment'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $updatableData = $request->toArray();
+            $updatableData = $request->validated();
             $data['data'] = tap(TaxPayment::where(["id" =>  $request["id"]]))->update(
                 $updatableData
             )

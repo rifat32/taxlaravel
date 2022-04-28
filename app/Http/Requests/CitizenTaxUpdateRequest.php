@@ -24,7 +24,7 @@ class CitizenTaxUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "note" => "required|date",
+            "note" => "required",
             "amount" => "required|numeric",
             "current_year" => "required",
             "union_id" => "required|numeric",

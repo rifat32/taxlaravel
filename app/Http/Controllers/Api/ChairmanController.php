@@ -25,6 +25,11 @@ class ChairmanController extends Controller
     {
         return $this->getChairmanService($request);
     }
+    public function getAllChairman(Request $request)
+    {
+        return $this->getAllChairmanService($request);
+    }
+
     public function getChairmanById($id,Request $request)
     {
 

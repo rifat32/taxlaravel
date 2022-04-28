@@ -16,7 +16,7 @@ trait ComplainService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/Complain'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $insertableData = $request->toArray();
+            $insertableData = $request->validated();
             $data['data'] =   Complain::create($insertableData);
 
             return response()->json($data, 201);
@@ -32,7 +32,7 @@ trait ComplainService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/Complain'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $updatableData = $request->toArray();
+            $updatableData = $request->validated();
             $data['data'] = tap(Complain::where(["id" =>  $request["id"]]))->update(
                 $updatableData
             )
@@ -45,11 +45,22 @@ trait ComplainService
 
 
     }
-    public function getComplainService($request)
+    public function getComplainService($status,$request)
     {
 
         try{
-            $data['data'] =   Complain::with("union","chairman")->paginate(10);
+$is_solved = null;
+            if($status == "solved") {
+                $is_solved = true;
+            } else {
+                $is_solved = false;
+            }
+
+            $data['data'] =   Complain::with("union","chairman")
+            ->where([
+                "is_solved" => $is_solved
+            ])
+            ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

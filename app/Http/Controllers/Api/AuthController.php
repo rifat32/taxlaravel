@@ -29,6 +29,7 @@ class AuthController extends Controller
         $request['password'] = Hash::make($request['password']);
         $request['remember_token'] = Str::random(10);
         $user =  User::create($request->toArray());
+        $user->assignRole("superadmin");
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
         $data["user"] = $user;
         $data["permissions"]  = $user->getAllPermissions()->pluck('name');

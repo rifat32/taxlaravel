@@ -138,6 +138,7 @@ Route::delete('/v1.0/districts/{id}', [DistrictController::class, "deleteDistric
 Route::post('/v1.0/methods', [MethodController::class, "createMethod"]);
 Route::put('/v1.0/methods', [MethodController::class, "updateMethod"]);
 Route::get('/v1.0/methods', [MethodController::class, "getMethod"]);
+Route::get('/v1.0/methods/all', [MethodController::class, "getAllMethod"]);
 Route::get('/v1.0/methods/{id}', [MethodController::class, "getMethodById"]);
 Route::get('/v1.0/methods/search/{term}', [MethodController::class, "searchMethod"]);
 Route::delete('/v1.0/methods/{id}', [MethodController::class, "deleteMethod"]);
@@ -147,6 +148,8 @@ Route::delete('/v1.0/methods/{id}', [MethodController::class, "deleteMethod"]);
 Route::post('/v1.0/citizens', [CitizenController::class, "createCitizen"]);
 Route::put('/v1.0/citizens', [CitizenController::class, "updateCitizen"]);
 Route::get('/v1.0/citizens', [CitizenController::class, "getCitizen"]);
+Route::get('/v1.0/citizens/wards/{wardId}', [CitizenController::class, "getCitizenByWardId"]);
+Route::get('/v1.0/citizens/unions/{unionId}', [CitizenController::class, "getCitizenByUnionId"]);
 Route::get('/v1.0/citizens/{id}', [CitizenController::class, "getCitizenById"]);
 Route::get('/v1.0/citizens/search/{term}', [CitizenController::class, "searchCitizen"]);
 Route::delete('/v1.0/citizens/{id}', [CitizenController::class, "deleteCitizen"]);
@@ -157,6 +160,8 @@ Route::delete('/v1.0/citizens/{id}', [CitizenController::class, "deleteCitizen"]
 Route::post('/v1.0/nonholding-citizens', [NonHoldingCitizenController::class, "createCitizen"]);
 Route::put('/v1.0/nonholding-citizens', [NonHoldingCitizenController::class, "updateCitizen"]);
 Route::get('/v1.0/nonholding-citizens', [NonHoldingCitizenController::class, "getCitizen"]);
+Route::get('/v1.0/nonholding-citizens/wards/{wardId}', [NonHoldingCitizenController::class, "getCitizenByWardId"]);
+Route::get('/v1.0/nonholding-citizens/unions/{unionId}', [NonHoldingCitizenController::class, "getCitizenByUnionId"]);
 Route::get('/v1.0/nonholding-citizens/{id}', [NonHoldingCitizenController::class, "getCitizenById"]);
 Route::get('/v1.0/nonholding-citizens/search/{term}', [NonHoldingCitizenController::class, "searchCitizen"]);
 Route::delete('/v1.0/nonholding-citizens/{id}', [NonHoldingCitizenController::class, "deleteCitizen"]);
@@ -171,6 +176,8 @@ Route::delete('/v1.0/nonholding-citizens/{id}', [NonHoldingCitizenController::cl
 Route::post('/v1.0/chairmans', [ChairmanController::class, "createChairman"]);
 Route::put('/v1.0/chairmans', [ChairmanController::class, "updateChairman"]);
 Route::get('/v1.0/chairmans', [ChairmanController::class, "getChairman"]);
+Route::get('/v1.0/chairmans/all', [ChairmanController::class, "getAllChairman"]);
+
 Route::get('/v1.0/chairmans/{id}', [ChairmanController::class, "getChairmanById"]);
 Route::get('/v1.0/chairmans/search/{term}', [ChairmanController::class, "searchChairman"]);
 Route::delete('/v1.0/chairmans/{id}', [ChairmanController::class, "deleteChairman"]);
@@ -178,7 +185,7 @@ Route::delete('/v1.0/chairmans/{id}', [ChairmanController::class, "deleteChairma
 // Complain
 Route::post('/v1.0/complains', [ComplainController::class, "createComplain"]);
 Route::put('/v1.0/complains', [ComplainController::class, "updateComplain"]);
-Route::get('/v1.0/complains', [ComplainController::class, "getComplain"]);
+Route::get('/v1.0/complains/status/{status}', [ComplainController::class, "getComplain"]);
 Route::get('/v1.0/complains/{id}', [ComplainController::class, "getComplainById"]);
 Route::get('/v1.0/complains/search/{term}', [ComplainController::class, "searchComplain"]);
 Route::delete('/v1.0/complains/{id}', [ComplainController::class, "deleteComplain"]);
@@ -275,6 +282,7 @@ Route::get('/v1.0/doctors/all', [DoctorController::class, "getAllDoctors"]);
     Route::get('/v1.0/products', [ProductController::class, "getProducts"]);
     Route::get('/v1.0/products/search/{search}', [ProductController::class, "searchProductByName"]);
     Route::get('/v1.0/products/{id}', [ProductController::class, "getProductById"]);
+
     // requisitions
     Route::post('/v1.0/requisitions', [RequisitionController::class, "createRequisition"]);
     Route::get('/v1.0/requisitions', [RequisitionController::class, "getRequisitions"]);
@@ -334,12 +342,14 @@ Route::get('/v1.0/doctors/all', [DoctorController::class, "getAllDoctors"]);
     Route::delete('/v1.0/wings/{id}', [WingController::class, "deleteWing"]);
     Route::put('/v1.0/wings', [WingController::class, "updateWing"]);
     Route::get('/v1.0/wings/all', [WingController::class, "getAllWings"]);
+
     //  bank
     Route::post('/v1.0/banks', [BankController::class, "createBank"]);
     Route::delete('/v1.0/banks/{id}', [BankController::class, "deleteBank"]);
     Route::put('/v1.0/banks', [BankController::class, "updateBank"]);
     Route::get('/v1.0/banks', [BankController::class, "getBanks"]);
     Route::get('/v1.0/banks/wing/{wing_id}', [BankController::class, "getBanksByWing"]);
+
     // balance
     Route::get('/v1.0/balance/total', [BalanceController::class, "getTotalBalance"]);
     Route::get('/v1.0/balance/wing-bank/{wing_id}/{bank_id}', [BalanceController::class, "getBalanceByWingAndBank"]);

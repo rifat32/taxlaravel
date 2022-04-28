@@ -26,7 +26,6 @@ class TradeLicenseRequest extends FormRequest
         return [
             "union_id" => "required|numeric",
             "ward_id" => "required|numeric",
-
             "institute" => "required",
             "owner" => "required",
             "guadian" => "required",

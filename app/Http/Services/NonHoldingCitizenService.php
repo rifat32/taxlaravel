@@ -83,6 +83,27 @@ trait NonHoldingCitizenService
         return $this->sendError($e,500);
         }
     }
+    public function getCitizenByWardIdService($wardId,$request)
+    {
+
+        try{
+            $data['data'] =   NonHoldingCitizen::where(["ward_id" => $wardId])->get();
+            return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+    }
+    public function getCitizenByUnionIdService($unionId,$request)
+    {
+
+        try{
+            $data['data'] =   NonHoldingCitizen::where(["union_id" => $unionId])->get();
+            return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+    }
+
     public function searchCitizenService($term,$request)
     {
         try{

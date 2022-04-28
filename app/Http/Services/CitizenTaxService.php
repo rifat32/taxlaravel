@@ -16,7 +16,8 @@ trait CitizenTaxService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/CitizenTax'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $insertableData = $request->toArray();
+            $insertableData = $request->validated();
+
             $data['data'] =   CitizenTax::create($insertableData);
 
             return response()->json($data, 201);
@@ -32,7 +33,7 @@ trait CitizenTaxService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/CitizenTax'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $updatableData = $request->toArray();
+            $updatableData = $request->validated();
             $data['data'] = tap(CitizenTax::where(["id" =>  $request["id"]]))->update(
                 $updatableData
             )

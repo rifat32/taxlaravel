@@ -29,6 +29,16 @@ class NonHoldingCitizenController extends Controller
 
         return $this->getCitizenByIdService($id,$request);
     }
+    public function getCitizenByWardId($wardId,Request $request)
+    {
+
+        return $this->getCitizenByWardIdService($wardId,$request);
+    }
+    public function getCitizenByUnionId($unionId,Request $request)
+    {
+
+        return $this->getCitizenByUnionIdService($unionId,$request);
+    }
 
     public function searchCitizen($term,Request $request)
     {

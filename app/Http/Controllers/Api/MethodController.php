@@ -24,6 +24,11 @@ class MethodController extends Controller
     {
         return $this->getMethodsService($request);
     }
+    public function getAllMethod(Request $request)
+    {
+        return $this->getAllMethodsService($request);
+    }
+
     public function getMethodById($id,Request $request)
     {
 

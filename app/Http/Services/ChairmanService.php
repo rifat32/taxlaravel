@@ -60,6 +60,18 @@ trait ChairmanService
         }
 
     }
+    public function getAllChairmanService($request)
+    {
+
+        try{
+            $data['data'] =   Chairman::get();
+        return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+
+    }
+
     public function getChairmanByIdService($id,$request)
     {
 

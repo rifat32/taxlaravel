@@ -21,9 +21,9 @@ class ComplainController extends Controller
         return $this->updateComplainService($request);
     }
 
-    public function getComplain(Request $request)
+    public function getComplain($status, Request $request)
     {
-        return $this->getComplainService($request);
+        return $this->getComplainService($status,$request);
     }
     public function getComplainById($id,Request $request)
     {

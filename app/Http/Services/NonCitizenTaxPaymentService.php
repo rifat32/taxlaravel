@@ -16,7 +16,7 @@ trait NonCitizenTaxPaymentService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/NonCitizenTaxPayment'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $insertableData = $request->toArray();
+            $insertableData = $request->validated();
             $data['data'] =   NonCitizenTaxPayment::create($insertableData);
 
             return response()->json($data, 201);
@@ -32,7 +32,7 @@ trait NonCitizenTaxPaymentService
             // $imageName = time().'.'.$request->image->extension();
             // $request->image->move(public_path('img/NonCitizenTaxPayment'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
-            $updatableData = $request->toArray();
+            $updatableData = $request->validated();
             $data['data'] = tap(NonCitizenTaxPayment::where(["id" =>  $request["id"]]))->update(
                 $updatableData
             )

@@ -49,6 +49,16 @@ trait MethodService
         }
 
     }
+    public function getAllMethodsService($request)
+    {
+
+        try{
+            $data['data'] =   Method::get();
+            return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+    }
     public function getMethodByIdService($id,$request)
     {
 
@@ -59,6 +69,8 @@ trait MethodService
         return $this->sendError($e,500);
         }
     }
+
+
     public function searchMethodService($term,$request)
     {
         try{

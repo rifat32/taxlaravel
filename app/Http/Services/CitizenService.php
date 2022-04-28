@@ -148,6 +148,27 @@ trait CitizenService
             return $this->sendError($e, 500);
         }
     }
+    public function getCitizenByWardIdService($wardId, $request)
+    {
+
+        try {
+            $data['data'] =   Citizen::where(["ward_id" => $wardId])->get();
+            return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
+    public function getCitizenByUnionIdService($wardId, $request)
+    {
+
+        try {
+            $data['data'] =   Citizen::where(["union_id" => $wardId])->get();
+            return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
+
     public function searchCitizenService($term, $request)
     {
         try {
