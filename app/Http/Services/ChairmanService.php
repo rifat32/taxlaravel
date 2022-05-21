@@ -17,8 +17,7 @@ trait ChairmanService
             // $request->image->move(public_path('img/Chairman'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
             $insertableData = $request->toArray();
-            $insertableData["pro_image"] = "image";
-            $insertableData["sign_image"] = "image";
+
             $data['data'] =   Chairman::create($insertableData);
 
             return response()->json($data, 201);
@@ -35,8 +34,6 @@ trait ChairmanService
             // $request->image->move(public_path('img/Chairman'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
             $updatableData = $request->validated();
-            $updatableData["pro_image"] = "image";
-            $updatableData["sign_image"] = "image";
             $data['data'] = tap(Chairman::where(["id" =>  $request["id"]]))->update(
                 $updatableData
             )

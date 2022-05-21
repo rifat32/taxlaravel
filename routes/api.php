@@ -37,7 +37,7 @@ use App\Http\Controllers\Api\NonHoldingCitizenController;
 use App\Http\Controllers\Api\TaxPaymentsController;
 use App\Http\Controllers\Api\TradeLicenseController;
 use App\Http\Controllers\SetUpController;
-
+use App\Http\Requests\ImageRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -371,4 +371,16 @@ Route::get('/v1.0/doctors/all', [DoctorController::class, "getAllDoctors"]);
     Route::get('/v1.0/accounts', [CharOfAccountController::class, "getAccounts"]);
     Route::post('/v1.0/chart-of-account', [CharOfAccountController::class, "createCharOfAccount"]);
     Route::get('/v1.0/chart-of-account', [CharOfAccountController::class, "getChartOfAccounts"]);
+
+
+    Route::post('/v1.0/image/upload/single/{location}',function(ImageRequest $request,$location){
+
+        $new_file_name = time() . '_' . $request->image->getClientOriginalName();
+
+        $request->image->move(public_path($location), $new_file_name);
+        $imageName = $location . "/" . $new_file_name;
+        return response()->json(["image" => $imageName],201);
+
+});
+
 });

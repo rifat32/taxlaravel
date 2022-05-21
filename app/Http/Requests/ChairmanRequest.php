@@ -28,8 +28,8 @@ class ChairmanRequest extends FormRequest
         "name" => "required",
         "nid" => "required",
         "mobile" => "required",
-        "pro_image" => "required",
-        "sign_image" => "required",
+        "pro_image" => "required|string",
+        "sign_image" => "required|string",
         "address" => "required",
         ];
     }

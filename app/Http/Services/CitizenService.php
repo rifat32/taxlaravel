@@ -18,7 +18,6 @@ trait CitizenService
             // $request->image->move(public_path('img/citizen'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
             $insertableData = $request->validated();
-            $insertableData["image"] = "image";
             $citizen =   Citizen::create($insertableData);
             $insertedMembersArray = [];
             foreach ($insertableData["members"] as $member) {
@@ -42,7 +41,7 @@ trait CitizenService
             // $request->image->move(public_path('img/citizen'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
             $updatableData = $request->validated();
-            $updatableData["image"] = "image";
+           
 
             foreach ($updatableData["members"] as $member) {
                 $member["image"] = "image";

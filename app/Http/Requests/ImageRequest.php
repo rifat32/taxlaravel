@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChairmanUpdateRequest extends FormRequest
+class ImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,7 @@ class ChairmanUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-        "union_id" => "required",
-        "name" => "required",
-        "nid" => "required",
-        "mobile" => "required",
-        "pro_image" => "required|string",
-        "sign_image" => "required|string",
-        "address" => "required",
+            "image"      =>"required|image|mimes:jpeg,png,jpg,gif,svg|max:2048"
         ];
     }
 }

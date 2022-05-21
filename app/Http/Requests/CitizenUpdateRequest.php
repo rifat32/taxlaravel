@@ -52,7 +52,7 @@ class CitizenUpdateRequest extends FormRequest
             "annual_price"      =>"required|numeric",
             "gov_advantage"      =>"required|string",
             // "image"      =>"required|image|mimes:jpeg,png,jpg,gif,svg|max:2048",
-            "image"      =>"required",
+            "image"      =>"required|string",
             "current_year"      =>"required",
             "raw_house"      =>"required|numeric",
             "half_building_house"      =>"required|numeric",
