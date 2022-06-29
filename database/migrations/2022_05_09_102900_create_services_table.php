@@ -49,6 +49,7 @@ class CreateServicesTable extends Migration
             $table->string("fighter_certificat_number")->nullable();
             $table->string("fighter_date")->nullable();
             $table->string("fighter_gadget_number")->nullable();
+
             $table->string("fighter_name")->nullable();
             $table->string("fighter_wife")->nullable();
             $table->string("tribal_community")->nullable();
@@ -62,6 +63,7 @@ class CreateServicesTable extends Migration
             $table->string("died_post_office")->nullable();
             $table->string("died_upozilla")->nullable();
             $table->string("died_zilla")->nullable();
+            $table->string("died_ward")->nullable();
 
 
 

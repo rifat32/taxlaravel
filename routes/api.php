@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\UpazilaController;
 use App\Http\Controllers\Api\VillageController;
 use App\Http\Controllers\Api\WardController;
 use App\Http\Controllers\Api\NonHoldingCitizenController;
+use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\TaxPaymentsController;
 use App\Http\Controllers\Api\TradeLicenseController;
 use App\Http\Controllers\SetUpController;
@@ -153,6 +154,22 @@ Route::get('/v1.0/citizens/unions/{unionId}', [CitizenController::class, "getCit
 Route::get('/v1.0/citizens/{id}', [CitizenController::class, "getCitizenById"]);
 Route::get('/v1.0/citizens/search/{term}', [CitizenController::class, "searchCitizen"]);
 Route::delete('/v1.0/citizens/{id}', [CitizenController::class, "deleteCitizen"]);
+
+
+
+
+// Services
+Route::post('/v1.0/services', [ServiceController::class, "createService"]);
+Route::put('/v1.0/services', [ServiceController::class, "updateService"]);
+Route::get('/v1.0/services', [ServiceController::class, "getService"]);
+Route::get('/v1.0/services/{id}', [ServiceController::class, "getServiceById"]);
+Route::get('/v1.0/services/search/{term}', [ServiceController::class, "searchService"]);
+Route::delete('/v1.0/services/{id}', [ServiceController::class, "deleteService"]);
+
+
+
+
+
 
 
 
