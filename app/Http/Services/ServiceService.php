@@ -5,7 +5,9 @@ namespace App\Http\Services;
 use App\Http\Utils\ErrorUtil;
 use App\Models\Service;
 use App\Models\Member;
+use App\Models\Warish;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 trait ServiceService
 {
@@ -17,10 +19,46 @@ trait ServiceService
 
             $insertableData = $request->validated();
             $insertableData["user_id"] = $request->user()->id;
+            if($insertableData["apply_types"] == '1'){
+                // $vat = (15 / $request->fee ) * 100;
+
+                $tradeId = DB::table('trade_licenses')->insertGetId(
+                    [
+                    'institute' => $insertableData["institute"],
+                    'owner' => $insertableData["owner"],
+                    'guadian' => $insertableData["guadian"],
+                    'present_addess' => $insertableData["present_addess"],
+                    'license_no' => $insertableData["license_no"],
+                    'ward_id' => $insertableData["ward_id"],
+                    'business_type' => $insertableData["business_type"],
+                    'permanent_addess' => $insertableData["permanent_addess"],
+
+
+                    'union_id'=> $insertableData["union_id"],
+                    'mother_name' =>  $insertableData["applicant_m_name"],
+                    'nid' => $insertableData["applicant_nid"],
+                    'expire_date'=> $insertableData["expire_date"],
+                    'current_year' =>  $insertableData["current_year"]
+
+                    ]
+                );
+
+                $insertableData["trade_id"] = $tradeId;
+             }
+
             $service =   Service::create($insertableData);
-
-
-
+            if($insertableData["apply_types"] == '2'){
+                foreach($insertableData["warish"] as $warish){
+                    Warish::insert([
+                       'name'=>$warish["name"],
+                       'relation'=>$warish["relation"],
+                       'age'=>$warish["age"],
+                       'comment'=>$warish["comment"],
+                       'applicant_id'=>$service->id
+                   ]) ;
+                     }
+             }
+      
 
             return response()->json($service, 201);
         } catch (Exception $e) {

@@ -71,6 +71,24 @@ class ServiceRequest extends FormRequest
             "died_ward" => "nullable",
 
 
+                'institute' => "nullable",
+                'owner' => "nullable",
+                'guadian' => "nullable",
+                'present_addess' => "nullable",
+                'license_no' => "nullable",
+                'ward_id' => "nullable",
+                'business_type' => "nullable",
+                'permanent_addess' => "nullable",
+
+
+                'union_id'=> "nullable",
+                'mother_name' =>  "nullable",
+                'nid' => "nullable",
+                'expire_date'=> "nullable",
+                'current_year' =>  "nullable",
+                "warish" => "array"
+
+
 
 
 
