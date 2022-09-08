@@ -66,7 +66,9 @@ trait NonHoldingCitizenService
     {
 
         try{
-            $data['data'] =   NonHoldingCitizen::with("union","ward","village","postOffice","upazila","district")->paginate(10);
+            $data['data'] =   NonHoldingCitizen::with("union","ward","village","postOffice","upazila","district")
+            ->latest()
+            ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -115,7 +117,8 @@ trait NonHoldingCitizenService
         ->orWhere("guardian","like","%".$term."%")
         ->orWhere("nid","like","%".$term."%")
         ->orWhere("mobile","like","%".$term."%")
-        ->get();
+        ->latest()
+        ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

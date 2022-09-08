@@ -50,7 +50,20 @@ trait CitizenTaxService
     {
 
         try{
-            $data['data'] =   CitizenTax::with("union","citizen","ward")->paginate(10);
+
+            if($request->user()->hasRole("superadmin")){
+
+                $data['data'] =   CitizenTax::with("union","citizen","ward")->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   CitizenTax::with("union","citizen","ward")
+                    ->where([
+                        "union_id" =>$request->user()->union_id
+                    ])->latest()
+                    ->paginate(10);
+
+
+                 }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -70,12 +83,42 @@ trait CitizenTaxService
     public function searchCitizenTaxService($term,$request)
     {
         try{
-            $data['data'] =   CitizenTax::with("union","citizen","ward")
-            ->leftJoin('citizens', 'citizen_taxes.citizen_id', '=', 'citizens.id')
-            ->where(
-                "citizens.mobile","like","%".$term."%"
-            )
-        ->get();
+
+
+
+            if($request->user()->hasRole("superadmin")){
+
+                $data['data'] =   CitizenTax::with("union","citizen","ward")
+                ->leftJoin('citizens', 'citizen_taxes.citizen_id', '=', 'citizens.id')
+                ->where(
+                    "citizens.mobile","like","%".$term."%"
+                )
+                ->orWhere(
+                    "citizens.nid_no","like","%".$term."%"
+                )
+                ->select("citizen_taxes.*")
+                ->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   CitizenTax::with("union","citizen","ward")
+                    ->leftJoin('citizens', 'citizen_taxes.citizen_id', '=', 'citizens.id')
+                    ->where(
+                        "citizens.mobile","like","%".$term."%"
+                    )
+                    ->where([
+                        "union_id" =>$request->user()->union_id
+                    ])
+                    ->orWhere(
+                        "citizens.nid_no","like","%".$term."%"
+                    )
+                    ->select("citizen_taxes.*")
+                    ->latest()
+                    ->paginate(10);
+
+                 }
+
+
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -93,7 +136,23 @@ trait CitizenTaxService
         }
 
     }
+    public function getInvoiceService($id, $request)
+    {
+        try {
+            $tax=CitizenTax::with('citizen')->find($id);
 
+
+         $data["invoice"] = view("invoice.citizen_tax", ["tax" => $tax])->render();
+
+
+
+
+
+                    return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
 
 
 

@@ -49,7 +49,8 @@ trait TaxPaymentService
     {
 
         try{
-            $data['data'] =   TaxPayment::with("union","citizen","method")->paginate(10);
+            $data['data'] =   TaxPayment::with("union","citizen","method")->latest()
+            ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -74,7 +75,12 @@ trait TaxPaymentService
             ->where(
                 "citizens.mobile","like","%".$term."%"
             )
-        ->get();
+            ->orWhere(
+                "citizens.nid_no","like","%".$term."%"
+            )
+            ->select("tax_payments.*")
+            ->latest()
+            ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -93,7 +99,26 @@ trait TaxPaymentService
 
     }
 
+    public function getInvoiceService($id, $request)
+    {
+        try {
+            $result=TaxPayment::with('citizen','method','citizen.union','citizen.ward','citizen.village','citizen.district','citizen.upazila','citizen.postoffice')
+            ->find($id);
 
+
+
+
+         $data["invoice"] = view("invoice.tax_payment", ["result" => $result])->render();
+
+
+
+
+
+                    return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
 
 
 }

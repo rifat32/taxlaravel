@@ -36,7 +36,7 @@ class CreateComplainsTable extends Migration
             $table->date("date");
             $table->string("time");
             $table->string("place");
-            $table->string("is_solved");
+            $table->string("status");
 
             $table->unsignedBigInteger("union_id");
             $table->unsignedBigInteger("chairman_id");

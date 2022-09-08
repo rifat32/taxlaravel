@@ -39,4 +39,8 @@ class NonCitizenTaxController extends Controller
     {
         return $this->deleteNonCitizenTaxService($id,$request);
     }
+    public function getInvoice($id,Request $request)
+    {
+        return $this->getInvoiceService($id,$request);
+    }
 }

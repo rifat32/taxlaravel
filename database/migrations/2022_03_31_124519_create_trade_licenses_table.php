@@ -24,14 +24,14 @@ class CreateTradeLicensesTable extends Migration
             $table->string("license_no");
             $table->string("business_type");
             $table->string("permanent_addess");
-            $table->string("fee_des");
-            $table->string("mobile_no");
-            $table->float("fee");
-            $table->float("vat");
+            $table->string("fee_des")->nullable();
+            $table->string("mobile_no")->nullable();
+            $table->float("fee")->nullable();
+            $table->float("vat")->nullable();
             $table->string("nid");
             $table->date("expire_date");
-            $table->float("total");
-            $table->string("vat_des");
+            $table->float("total")->nullable();
+            $table->string("vat_des")->nullable();
             $table->string("current_year");
 
 

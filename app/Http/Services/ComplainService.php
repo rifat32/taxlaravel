@@ -49,18 +49,26 @@ trait ComplainService
     {
 
         try{
-$is_solved = null;
-            if($status == "solved") {
-                $is_solved = true;
-            } else {
-                $is_solved = false;
-            }
 
-            $data['data'] =   Complain::with("union","chairman")
-            ->where([
-                "is_solved" => $is_solved
-            ])
-            ->paginate(10);
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Complain::with("union","chairman")
+                ->where([
+                    "status" => $status
+                ])
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   Complain::with("union","chairman")
+                    ->where([
+                        "status" => $status
+                    ])
+                    ->where([
+                        "union_id" =>$request->user()->union_id
+                    ])
+                    ->paginate(10);
+
+
+                 }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -77,18 +85,87 @@ $is_solved = null;
         return $this->sendError($e,500);
         }
     }
-    public function searchComplainService($term,$request)
+    public function searchComplainService($status,$term,$request)
     {
         try{
+
+
+
+        if($request->user()->hasRole("superadmin")){
             $data['data'] =   Complain::with("union","chairman")
+            ->where([
+                "status" => $status
+            ])
         ->where("complain_no","like","%".$term."%")
-        ->get();
+        ->latest()
+        ->paginate(10);
+             } else {
+                $data['data'] =   Complain::with("union","chairman")
+            ->where([
+                "status" => $status
+            ])
+            ->where([
+                "union_id" =>$request->user()->union_id
+            ])
+        ->where("complain_no","like","%".$term."%")
+        ->latest()
+        ->paginate(10);
+
+
+
+             }
+
+
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
         }
 
     }
+    public function searchComplainByDateService($status,$from,$to,$request)
+    {
+        try{
+
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Complain::with("union","chairman")
+                ->where([
+                    "status" => $status
+                ])
+                ->whereBetween('date', [$from, $to])
+            ->latest()
+            ->paginate(10);
+                 } else {
+                    $data['data'] =   Complain::with("union","chairman")
+            ->where([
+                "status" => $status
+            ])
+            ->where([
+                "union_id" =>$request->user()->union_id
+            ])
+            ->whereBetween('date', [$from, $to])
+        ->latest()
+        ->paginate(10);
+
+
+
+
+                 }
+
+
+
+
+
+
+
+        return response()->json($data, 200);
+        } catch(Exception $e){
+        return $this->sendError($e,500);
+        }
+
+    }
+
 
     public function deleteComplainService($id,$request)
     {
@@ -102,6 +179,27 @@ $is_solved = null;
     }
 
 
+    public function getInvoiceService($id, $request)
+    {
+        try {
 
+
+            $result = Complain::with( 'chairman')
+                ->find($id);
+
+
+
+
+
+
+         $data["invoice"] = view("invoice.complainv2", ["result" => $result])->render();
+
+
+
+                    return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
 
 }

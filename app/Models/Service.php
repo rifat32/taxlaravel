@@ -51,7 +51,7 @@ class Service extends Model
             "died_name" ,
             "died_father" ,
             "died_mother" ,
-            "died_village" => "nullable",
+            "died_village",
             "died_post_office" ,
             "died_upozilla" ,
             "died_zilla" ,

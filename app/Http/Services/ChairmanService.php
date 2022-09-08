@@ -50,7 +50,21 @@ trait ChairmanService
     {
 
         try{
-            $data['data'] =   Chairman::with("union")->paginate(10);
+
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Chairman::with("union")
+                ->latest()
+                ->paginate(10);
+            } else {
+                $data['data'] =   Chairman::with("union")
+                ->where([
+                    "union_id" =>$request->user()->union_id
+                ])
+            ->latest()
+            ->paginate(10);
+
+            }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -61,7 +75,19 @@ trait ChairmanService
     {
 
         try{
-            $data['data'] =   Chairman::get();
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Chairman::with("union")
+                ->latest()
+                ->get();
+            } else {
+                $data['data'] =   Chairman::with("union")
+                ->where([
+                    "union_id" =>$request->user()->union_id
+                ])
+            ->latest()
+            ->get();
+
+            }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -82,12 +108,28 @@ trait ChairmanService
     public function searchChairmanService($term,$request)
     {
         try{
+
+        if($request->user()->hasRole("superadmin")){
             $data['data'] =   Chairman::with("union")
         ->where("name","like","%".$term."%")
         ->orWhere("nid","like","%".$term."%")
         ->orWhere("mobile","like","%".$term."%")
         ->orWhere("address","like","%".$term."%")
-        ->get();
+        ->latest()
+        ->paginate(10);
+        } else {
+            $data['data'] =   Chairman::with("union")
+            ->where([
+                "union_id" =>$request->user()->union_id
+            ])
+            ->where("name","like","%".$term."%")
+            ->orWhere("nid","like","%".$term."%")
+            ->orWhere("mobile","like","%".$term."%")
+            ->orWhere("address","like","%".$term."%")
+            ->latest()
+            ->paginate(10);
+
+        }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

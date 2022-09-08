@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        "union_id"
     ];
     protected $guard_name = 'api';
     /**

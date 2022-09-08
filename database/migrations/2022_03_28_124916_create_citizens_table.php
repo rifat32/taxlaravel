@@ -47,8 +47,10 @@ class CreateCitizensTable extends Migration
             $table->float("raw_house");
             $table->float("half_building_house");
             $table->float("building_house");
-
-
+            $table->string("strong_house");
+            $table->string("half_strong_house");
+            $table->string("weak_house");
+           
 
 
 

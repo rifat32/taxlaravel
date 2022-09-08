@@ -78,6 +78,7 @@ class CreateServicesTable extends Migration
 
 
 
+
             $table->timestamps();
         });
     }

@@ -1,0 +1,341 @@
+/* .color {
+    color: #d3e4ae #69c0ba #783e73 #462c77 #8e5274 #19609e;
+    color: #afd1ed #cb4c5f #773351 #b97a93 #723353;
+} */
+
+@import url("https://cdn.rawgit.com/sh4hids/bangla-web-fonts/bensen-handwriting/stylesheet.css");
+body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact !important;
+}
+
+.nagorik {
+    display: block;
+    margin: 60px auto;
+    width: 80%;
+    background-color: #d3e4ae;
+    padding: 20px 0px 0px 0px;
+}
+
+.nagorik-section {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    height: 70rem;
+}
+
+.nagorik-left {
+    width: 35%;
+    padding: 10px 20px;
+}
+
+.nagorik-right {
+    width: 65%;
+    padding: 10px 20px;
+}
+
+.nagorik-left-header p,
+.nagorik-right-header p {
+    text-align: center;
+    color: #419ef0;
+    margin: 0;
+}
+
+.nagorik-left-header,
+.nagorik-right-header {
+    height: 16rem;
+}
+
+.nagorik-left-header p {
+    padding: 5px 0px;
+}
+
+.dackghor {
+    font-size: 13px;
+}
+
+.nagorik-left-header-title,
+.nagorik-right-header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.nagorik-left-header-title img,
+.nagorik-right-header-title img {
+    width: 60px;
+    padding-right: 20px;
+}
+
+.nagorik-right-header-title img {
+    width: 65px;
+    padding: 0px 20px;
+}
+
+.nagorik-left-header h2,
+h4,
+h5,
+p,
+.nagorik-right-header h2,
+h4,
+h5,
+p {
+    text-align: center;
+    margin: 0;
+}
+
+.nagorik-left-header-title h1 {
+    font-size: 20px;
+    margin: 0;
+    color: #783e73;
+}
+
+.nagorik-right-header-title h1 {
+    font-size: 30px;
+    margin: 0;
+    color: #783e73;
+}
+
+.nagorik-left-header h5,
+.nagorik-right-header h5 {
+    font-size: 20px;
+    color: #462c77;
+}
+
+.nagorik-left-header h4,
+.nagorik-right-header h4 {
+    font-size: 20px;
+    color: #783e73;
+    letter-spacing: 6px;
+}
+
+.nagorik-left-header h2,
+.nagorik-right-header h2 {
+    font-size: 50px;
+    color: #19609e;
+    text-shadow: 2px 2px 2px #ffffff, 4px 4px 6px rgb(170, 170, 170);
+    font-family: "BenSenHandwriting";
+    letter-spacing: 5px;
+}
+
+.nagorik-left-discription-input,
+.nagorik-right-discription-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0px;
+    height: 2rem;
+}
+
+.nagorik-left-discription,
+.nagorik-right-discription {
+    height: 22rem;
+}
+
+.nagorik-left-discription p {
+    text-align: start;
+    line-height: 1.8rem;
+}
+
+.nagorik-right-discription p {
+    text-align: start;
+    line-height: 2.5rem;
+    word-spacing: 3px;
+}
+
+.nagorik-left-discription p span,
+.nagorik-right-discription p span {
+    padding: 2px 5px;
+    border-bottom: 2px dotted black;
+    margin: 5px 3px;
+}
+
+.nagorik-left-footer h6,
+p {
+    text-align: center;
+    margin: 0;
+}
+
+.nagorik-left-footer {
+    padding: 90px 0px 50px 0px;
+    height: 6rem;
+}
+
+.nagorik-right-footer {
+    right: 15%;
+    padding: 90px 0px 50px 0px;
+    height: 6rem;
+}
+
+.nagorik-right-footer p,
+h6 {
+    text-align: center;
+    margin: 0;
+}
+
+.nagorik-left-footer h6,
+.nagorik-right-footer h6 {
+    font-size: 20px;
+    color: #783e73;
+}
+
+.nagorik-left-footer p,
+.nagorik-right-footer p {
+    font-size: 15px;
+}
+
+.nagorik-footer {
+    padding: 10px 20px;
+    background-color: #19609e;
+    color: #ffffff;
+}
+
+.nagorik-footer p {
+    text-align: right;
+    font-size: 14px;
+}
+
+.instructions {
+    width: 90% !important;
+    margin: 5px;
+}
+
+.instructions p {
+    /* width: 90% !important; */
+    text-align: left !important;
+    font-size: 13px;
+}
+
+
+@media (max-width: 595px) {
+    .nagorik {
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    .nagorik-section {
+        height: 56rem;
+    }
+
+    .nagorik-left-header-title img,
+    .nagorik-right-header-title img {
+        width: 40px;
+        padding-right: 20px;
+    }
+
+    .nagorik-right-header-title img {
+        width: 40px;
+        padding: 0px 20px;
+    }
+
+    .nagorik-left {
+        width: 35%;
+    }
+
+    .nagorik-right {
+        width: 65%;
+    }
+
+    .nagorik-left-header,
+    .nagorik-right-header {
+        height: 13rem;
+    }
+
+    .nagorik-left-header p {
+        padding: 5px 0px;
+    }
+
+    .dackghor {
+        font-size: 10px;
+    }
+
+    .nagorik-right-header p {
+        font-size: 17px;
+    }
+
+    .nagorik-left-header-title img,
+    .nagorik-right-header-title img {
+        width: 40px;
+    }
+
+    .nagorik-left-header-title h1 {
+        font-size: 13px;
+    }
+
+    .nagorik-right-header-title h1 {
+        font-size: 13px;
+    }
+
+    .nagorik-left-header h5,
+    .nagorik-right-header h5 {
+        font-size: 12px;
+    }
+
+    .nagorik-left-header h4,
+    .nagorik-right-header h4 {
+        font-size: 13px;
+    }
+
+    .nagorik-left-header h2,
+    .nagorik-right-header h2 {
+        font-size: 25px;
+    }
+
+    .nagorik-left-discription-input p,
+    .nagorik-right-discription-input p {
+        font-size: 10px;
+    }
+
+    .nagorik-left-discription,
+    .nagorik-right-discription {
+        height: 20rem;
+    }
+
+    .nagorik-left-discription p,
+    .nagorik-right-discription p {
+        font-size: 12px;
+        line-height: 1.8rem;
+    }
+
+    .nagorik-left-footer,
+    .nagorik-right-footer {
+        height: 0rem;
+    }
+
+    .nagorik-left-footer h6,
+    .nagorik-right-footer h6 {
+        font-size: 13px;
+    }
+
+    .nagorik-left-footer p,
+    .nagorik-right-footer p {
+        font-size: 10px;
+    }
+
+    .nagorik-footer {
+        padding: 10px 20px;
+        background-color: #19609e;
+        color: #ffffff;
+    }
+
+    .nagorik-footer p {
+        text-align: right;
+        font-size: 10px;
+    }
+
+    .instructions {
+        width: 90% !important;
+        margin: 20px 5px;
+    }
+
+    .instructions h3 {
+        font-size: 13px;
+    }
+
+    .instructions p {
+        text-align: left !important;
+        font-size: 10px;
+    }
+}

@@ -49,7 +49,8 @@ trait TradeLicenseService
     {
 
         try{
-            $data['data'] =   TradeLicense::with("union","ward")->paginate(10);
+            $data['data'] =   TradeLicense::with("union","ward") ->latest()
+            ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -75,7 +76,10 @@ trait TradeLicenseService
         ->orWhere("guadian","like","%".$term."%")
         ->orWhere("license_no","like","%".$term."%")
         ->orWhere("mobile_no","like","%".$term."%")
-        ->get();
+        ->orWhere("nid","like","%".$term."%")
+
+        ->latest()
+        ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -93,7 +97,25 @@ trait TradeLicenseService
         }
 
     }
+    public function getInvoiceService($id, $request)
+    {
+        try {
 
+            $result=TradeLicense::with('ward')
+            ->find($id);
+
+
+
+
+         $data["invoice"] = view("invoice.license", ["result" => $result])->render();
+
+
+
+                    return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
 
 
 

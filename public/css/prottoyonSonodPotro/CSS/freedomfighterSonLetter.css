@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.freedomSon-section {
+    display: block;
+    margin: 0 auto;
+    padding: 50px 0px 25px 0px;
+    width: 70%;
+}
+
+.freedomSon-header h2 {
+    font-size: 30px;
+    padding: 10px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.freedomSon-header p,
+.freedomSon-header h3 {
+    padding: 3px 0px;
+    margin: 0;
+}
+
+.freedomSon-header p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.freedomSon-header h3,
+.freedomSon-title h3 {
+    font-size: 20px;
+}
+
+.freedomSon-header h2,
+h3,
+.freedomSon-title h3 {
+    text-align: center;
+}
+
+.freedomSon-title h3 {
+    padding: 20px 0px 5px 0px;
+    border-bottom: 3px solid rgb(36, 35, 35);
+    width: 45%;
+    margin: 30px auto 50px auto;
+    display: block;
+}
+
+.freedomSon-address p,
+.freedomSon-details p {
+    line-height: 2.8rem;
+    font-size: 18px;
+    word-spacing: 4px;
+    font-weight: 500;
+}
+
+.freedomSon-address span,
+.freedomSon-details span {
+    padding: 0px 25px;
+    margin: 0px 5px;
+    width: 100%;
+}
+.instructions {
+    width: 100% !important;
+    margin: 80px 5px 30px 5px;
+}
+
+.instructions p {
+    /* width: 90% !important; */
+    text-align: left !important;
+    font-size: 13px;
+}
+
+.instructions h3 {
+    padding: 20px 0px 5px 0px;
+    border-bottom: 3px solid rgb(36, 35, 35);
+    width: 26%;
+    margin: 30px auto 50px auto;
+    display: block;
+}
+
+
+
+@media (max-width: 595px){
+    .freedomSon-section {
+        width: 100%;
+    }
+}

@@ -56,6 +56,11 @@ class CitizenUpdateRequest extends FormRequest
             "current_year"      =>"required",
             "raw_house"      =>"required|numeric",
             "half_building_house"      =>"required|numeric",
+            
+            "strong_house" => "required|numeric",
+            "half_strong_house" => "required|numeric",
+            "weak_house" => "required|numeric",
+
             "building_house"      =>"required|numeric",
             "members"      =>"required|array",
          "members.*.id"      =>"required|numeric",

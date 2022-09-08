@@ -39,4 +39,8 @@ class TradeLicenseController extends Controller
     {
         return $this->deleteTradeLicenseService($id,$request);
     }
+    public function getInvoice($id,Request $request)
+    {
+        return $this->getInvoiceService($id,$request);
+    }
 }

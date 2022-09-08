@@ -27,7 +27,8 @@ trait UnionService
         try{
             $data['data'] = tap(Union::where(["id" =>  $request["id"]]))->update(
                 $request->only(
-                    "name"
+                    "name",
+                    "image"
                 )
             )->first();
             return response()->json($data, 200);
@@ -52,7 +53,14 @@ trait UnionService
     {
 
         try{
-            $data['data'] =   Union::all();
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Union::all();
+            } else {
+                $data['data'] =   Union::where([
+                    "id" =>$request->user()->union_id
+                ])->get();
+            }
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

@@ -41,7 +41,7 @@ trait CitizenService
             // $request->image->move(public_path('img/citizen'), $imageName);
             // $imageName = "img/restaurant/" . $imageName;
             $updatableData = $request->validated();
-           
+
 
             foreach ($updatableData["members"] as $member) {
                 $member["image"] = "image";
@@ -115,7 +115,8 @@ trait CitizenService
                     "current_year",
                     "raw_house",
                     "half_building_house",
-                    "building_house"
+                    "building_house",
+                    "house_structure"
                 ])
                     ->toArray()
             )
@@ -131,7 +132,23 @@ trait CitizenService
     {
 
         try {
-            $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district","members")->paginate(10);
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district","members")
+            ->latest()
+            ->paginate(10);
+            } else {
+                $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district","members")
+                ->where([
+                    "union_id" =>$request->user()->union_id
+                ])
+                ->latest()
+                ->paginate(10);
+            }
+
+
+
+
             return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);
@@ -151,17 +168,29 @@ trait CitizenService
     {
 
         try {
+
+            if($request->user()->hasRole("superadmin")){
+
             $data['data'] =   Citizen::where(["ward_id" => $wardId])->get();
+            } else {
+
+                $data['data'] =   Citizen::where(["ward_id" => $wardId]) ->where([
+                    "union_id" =>$request->user()->union_id
+                ])->get();
+            }
+
+
+
             return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);
         }
     }
-    public function getCitizenByUnionIdService($wardId, $request)
+    public function getCitizenByUnionIdService($unionId, $request)
     {
 
         try {
-            $data['data'] =   Citizen::where(["union_id" => $wardId])->get();
+            $data['data'] =   Citizen::where(["union_id" => $unionId])->get();
             return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);
@@ -171,7 +200,12 @@ trait CitizenService
     public function searchCitizenService($term, $request)
     {
         try {
-            $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district")
+
+
+
+                if($request->user()->hasRole("superadmin")){
+
+                   $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district")
                 ->where("holding_no", "like", "%" . $term . "%")
                 ->orWhere("thana_head_name", "like", "%" . $term . "%")
                 ->orWhere("thana_head_religion", "like", "%" . $term . "%")
@@ -180,7 +214,32 @@ trait CitizenService
                 ->orWhere("c_mother_name", "like", "%" . $term . "%")
                 ->orWhere("guardian", "like", "%" . $term . "%")
                 ->orWhere("nid_no", "like", "%" . $term . "%")
-                ->get();
+                ->latest()
+                ->paginate(10);
+                    } else {
+                        $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district")
+                ->where("holding_no", "like", "%" . $term . "%")
+                ->where([
+                    "union_id" =>$request->user()->union_id
+                ])
+                ->orWhere("thana_head_name", "like", "%" . $term . "%")
+                ->orWhere("thana_head_religion", "like", "%" . $term . "%")
+                ->orWhere("thana_head_occupation", "like", "%" . $term . "%")
+                ->orWhere("mobile", "like", "%" . $term . "%")
+                ->orWhere("c_mother_name", "like", "%" . $term . "%")
+                ->orWhere("guardian", "like", "%" . $term . "%")
+                ->orWhere("nid_no", "like", "%" . $term . "%")
+                ->latest()
+                ->paginate(10);
+
+                    }
+
+
+
+
+
+
+
             return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);
@@ -192,6 +251,25 @@ trait CitizenService
         try {
             Citizen::where(["id" => $id])->delete();
             return response()->json(["ok" => true], 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
+    public function getInvoiceService($id, $request)
+    {
+        try {
+
+            $result=Citizen::with('union','ward','village','district','upazila','postoffice')
+            ->find($id);
+
+
+
+
+         $data["invoice"] = view("invoice.citizen", ["result" => $result])->render();
+
+
+
+                    return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);
         }

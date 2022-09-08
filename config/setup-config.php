@@ -12,9 +12,11 @@ return [
             "role" => "superadmin",
             "permissions" => [
                 "all",
+                "election_area",
+                "user_management",
             ],
         ],
-    
+
 
     ],
     "roles" => [
@@ -23,7 +25,9 @@ return [
 
     ],
     "permissions" => [
-      "all"
+      "all",
+      "election_area",
+      "user_management"
 
 
 

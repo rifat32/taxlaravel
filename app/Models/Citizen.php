@@ -40,7 +40,10 @@ class Citizen extends Model
         "current_year",
         "raw_house",
         "half_building_house",
-        "building_house"
+        "building_house",
+        "strong_house",
+        "half_strong_house",
+        "weak_house",
      ];
      protected $casts = [
          "union_id"=> 'integer',

@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.badiProtibadi-section {
+    display: block;
+    padding: 50px 0px 25px 0px;
+    width: 70%;
+    margin: auto;
+}
+
+.badiProtibadi-section-left,
+.badiProtibadi-section-right {
+    margin: 0px 40px;
+}
+
+.badiProtibadi-header {
+    border-bottom: 3px solid rgb(36, 35, 35);
+}
+
+.badiProtibadi-header h2 {
+    font-size: 30px;
+    padding: 10px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.badiProtibadi-header p {
+    padding: 3px 0px;
+    margin: 0;
+}
+
+.badiProtibadi-header h2,
+h3,
+p {
+    text-align: center;
+}
+
+.badiProtibadi-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.badiProtibadi-title-col {
+    width: 35%;
+    text-align: start;
+}
+
+.badiProtibadi-title span {
+    padding: 3px 5px;
+    border-bottom: 2.5px dotted rgb(36, 35, 35);
+}
+
+#badiProtibadi-details {
+    padding: 22rem 0rem 0rem 0rem;
+}
+
+.badiProtibadi-details p {
+    line-height: 1.9rem;
+    word-spacing: 3px;
+    text-align: start;
+}
+
+.badiProtibadi-details span {
+    padding: 3px 5px;
+    border-bottom: 2.5px dotted rgb(36, 35, 35);
+}
+
+.badiProtibadi-space {
+    border: none;
+    padding: 0px 25px;
+}
+
+.badiProtibadi-signature p {
+    text-align: right;
+    padding: 40px 40px;
+}
+.instructions {
+    width: 100% !important;
+    margin: 5px 5px;
+}
+
+.instructions p {
+    /* width: 90% !important; */
+    text-align: left !important;
+    font-size: 13px;
+}
+
+.instructions h3 {
+    padding: 20px 0px 5px 0px;
+    border-bottom: 3px solid rgb(36, 35, 35);
+    width: 26%;
+    margin: 30px auto 50px auto;
+    display: block;
+}
+
+
+
+
+@media (max-width: 595px){
+    .badiProtibadi-section {
+        width: 100%;
+    }
+}

@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.freedomfighter-section {
+    display: block;
+    margin: 0 auto;
+    padding: 50px 0px 25px 0px;
+    width: 70%;
+}
+
+.freedomfighter-header h2 {
+    font-size: 30px;
+    padding: 10px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.freedomfighter-header p,
+.freedomfighter-header h3 {
+    padding: 3px 0px;
+    margin: 0;
+}
+
+.freedomfighter-header p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.freedomfighter-header h3,
+.freedomfighter-title h3 {
+    font-size: 20px;
+}
+
+.freedomfighter-header h2,
+h3,
+.freedomfighter-title h3 {
+    text-align: center;
+}
+
+.freedomfighter-title h3 {
+    padding: 20px 0px 5px 0px;
+    border-bottom: 3px solid rgb(36, 35, 35);
+    width: 33%;
+    margin: 30px auto 50px auto;
+    display: block;
+}
+
+.freedomfighter-address p,
+.freedomfighter-details p {
+    line-height: 2.8rem;
+    font-size: 18px;
+    word-spacing: 4px;
+    font-weight: 500;
+}
+
+.freedomfighter-address span,
+.freedomfighter-details span {
+    padding: 0px 25px;
+    margin: 0px 5px;
+    width: 100%;
+}
+.instructions {
+    width: 100% !important;
+    margin: 80px 5px 30px 5px;
+}
+
+.instructions p {
+    /* width: 90% !important; */
+    text-align: left !important;
+    font-size: 13px;
+}
+.instructions h3 {
+    padding: 20px 0px 5px 0px;
+    border-bottom: 3px solid rgb(36, 35, 35);
+    width: 26%;
+    margin: 30px auto 50px auto;
+    display: block;
+}
+
+
+
+
+@media (max-width: 595px){
+    .freedomfighter-section {
+        width: 100%;
+    }
+}

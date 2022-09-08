@@ -47,7 +47,7 @@ class ComplainRequest extends FormRequest
             "place" => "required",
             "union_id" => "required|numeric",
             "chairman_id" => "required|numeric",
-            "is_solved"=> "required|boolean"
+            "status"=> "required|string"
         ];
     }
 }

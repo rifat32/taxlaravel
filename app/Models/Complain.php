@@ -30,7 +30,7 @@ class Complain extends Model
         "date",
         "time",
         "place",
-        "is_solved",
+        "status",
         "union_id",
         "chairman_id",
      ];
@@ -46,4 +46,12 @@ class Complain extends Model
     {
         return $this->hasOne(Chairman::class, 'id', 'chairman_id')->withTrashed();
     }
+    // public function citizen(){
+    //     return $this->belongsTo(Citizen::class,'com_applicant_id','id');
+    // }
+    // public function citizen1(){
+    //     return $this->belongsTo(Citizen::class,'com_defendant_id','id');
+    // }
+
+
 }

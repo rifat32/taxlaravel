@@ -31,12 +31,21 @@ class ComplainController extends Controller
         return $this->getComplainByIdService($id,$request);
     }
 
-    public function searchComplain($term,Request $request)
+    public function searchComplain($status,$term,Request $request)
     {
-        return $this->searchComplainService($term,$request);
+        return $this->searchComplainService($status,$term,$request);
     }
+    public function searchComplainByDate($status,$from,$to,Request $request)
+    {
+        return $this->searchComplainByDateService($status,$from,$to,$request);
+    }
+
     public function deleteComplain($id,Request $request)
     {
         return $this->deleteComplainService($id,$request);
+    }
+    public function getInvoice($id,Request $request)
+    {
+        return $this->getInvoiceService($id,$request);
     }
 }

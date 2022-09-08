@@ -70,11 +70,16 @@ trait NonCitizenTaxPaymentService
     {
         try{
             $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method")
-            ->leftJoin('citizens', 'tax_payments.citizen_id', '=', 'citizens.id')
+            ->leftJoin('non_holding_citizens', 'non_citizen_tax_payments.non_citizen_id', '=', 'non_holding_citizens.id')
             ->where(
-                "citizens.mobile","like","%".$term."%"
+                "non_holding_citizens.nid","like","%".$term."%"
             )
-        ->get();
+            ->orWhere(
+                "non_holding_citizens.mobile","like","%".$term."%"
+            )
+            ->select("non_citizen_tax_payments.*")
+            ->latest()
+        ->paginate(10);
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -93,7 +98,25 @@ trait NonCitizenTaxPaymentService
 
     }
 
+    public function getInvoiceService($id, $request)
+    {
+        try {
+            $result=NonCitizenTaxPayment::with('union','noncitizen')
+            ->find($id);
+    
 
+
+         $data["invoice"] = view("invoice.non_citizen_payment", ["result" => $result])->render();
+
+
+
+
+
+                    return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
 
 
 }

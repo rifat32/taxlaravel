@@ -49,4 +49,8 @@ class CitizenController extends Controller
     {
         return $this->deleteCitizenService($id,$request);
     }
+    public function getInvoice($id,Request $request)
+    {
+        return $this->getInvoiceService($id,$request);
+    }
 }

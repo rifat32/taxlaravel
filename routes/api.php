@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\CitizenTaxController;
 use App\Http\Controllers\Api\ComplainController;
 use App\Http\Controllers\Api\DistrictController;
 use App\Http\Controllers\Api\DoctorController;
+use App\Http\Controllers\Api\HouseStructureController;
 use App\Http\Controllers\Api\LabReportController;
 use App\Http\Controllers\Api\LabReportTemplateController;
 use App\Http\Controllers\Api\MethodController;
@@ -52,6 +53,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 
 
 Route::middleware('auth:api')->get('/v1.0/user', function (Request $request) {
@@ -126,6 +128,24 @@ Route::get('/v1.0/upazilas/search/{term}', [UpazilaController::class, "searchUpa
 Route::delete('/v1.0/upazilas/{id}', [UpazilaController::class, "deleteUpazila"]);
 
 
+// Upazila
+Route::post('/v1.0/house-structure', [HouseStructureController::class, "createHouseStructure"]);
+Route::put('/v1.0/house-structure', [HouseStructureController::class, "updateHouseStructure"]);
+Route::get('/v1.0/house-structure', [HouseStructureController::class, "getHouseStructure"]);
+Route::get('/v1.0/house-structure/unions/{unionId}', [HouseStructureController::class, "getHouseStructureByUnion"]);
+Route::get('/v1.0/house-structure/{id}', [HouseStructureController::class, "getHouseStructureById"]);
+Route::get('/v1.0/house-structure/search/{term}', [HouseStructureController::class, "searchHouseStructure"]);
+Route::delete('/v1.0/house-structure/{id}', [HouseStructureController::class, "deleteHouseStructure"]);
+
+
+
+
+
+
+
+
+
+
 // District
 Route::post('/v1.0/districts', [DistrictController::class, "createDistrict"]);
 Route::put('/v1.0/districts', [DistrictController::class, "updateDistrict"]);
@@ -145,6 +165,7 @@ Route::get('/v1.0/methods/search/{term}', [MethodController::class, "searchMetho
 Route::delete('/v1.0/methods/{id}', [MethodController::class, "deleteMethod"]);
 
 
+
 // Citizen
 Route::post('/v1.0/citizens', [CitizenController::class, "createCitizen"]);
 Route::put('/v1.0/citizens', [CitizenController::class, "updateCitizen"]);
@@ -154,7 +175,7 @@ Route::get('/v1.0/citizens/unions/{unionId}', [CitizenController::class, "getCit
 Route::get('/v1.0/citizens/{id}', [CitizenController::class, "getCitizenById"]);
 Route::get('/v1.0/citizens/search/{term}', [CitizenController::class, "searchCitizen"]);
 Route::delete('/v1.0/citizens/{id}', [CitizenController::class, "deleteCitizen"]);
-
+Route::get('/v1.0/citizens/get/invoice/{id}', [CitizenController::class, "getInvoice"]);
 
 
 
@@ -165,6 +186,8 @@ Route::get('/v1.0/services', [ServiceController::class, "getService"]);
 Route::get('/v1.0/services/{id}', [ServiceController::class, "getServiceById"]);
 Route::get('/v1.0/services/search/{term}', [ServiceController::class, "searchService"]);
 Route::delete('/v1.0/services/{id}', [ServiceController::class, "deleteService"]);
+ Route::get('/v1.0/services/get/invoice/{id}', [ServiceController::class, "getInvoice"]);
+
 
 
 
@@ -204,8 +227,10 @@ Route::post('/v1.0/complains', [ComplainController::class, "createComplain"]);
 Route::put('/v1.0/complains', [ComplainController::class, "updateComplain"]);
 Route::get('/v1.0/complains/status/{status}', [ComplainController::class, "getComplain"]);
 Route::get('/v1.0/complains/{id}', [ComplainController::class, "getComplainById"]);
-Route::get('/v1.0/complains/search/{term}', [ComplainController::class, "searchComplain"]);
+Route::get('/v1.0/complains/status/{status}/search/{term}', [ComplainController::class, "searchComplain"]);
+Route::get('/v1.0/complains/status/{status}/date/{from}/{to}', [ComplainController::class, "searchComplainByDate"]);
 Route::delete('/v1.0/complains/{id}', [ComplainController::class, "deleteComplain"]);
+Route::get('/v1.0/complains/get/invoice/{id}', [ComplainController::class, "getInvoice"]);
 // trade license
 Route::post('/v1.0/trade-license', [TradeLicenseController::class, "createTradeLicense"]);
 Route::put('/v1.0/trade-license', [TradeLicenseController::class, "updateTradeLicense"]);
@@ -213,6 +238,7 @@ Route::get('/v1.0/trade-license', [TradeLicenseController::class, "getTradeLicen
 Route::get('/v1.0/trade-license/{id}', [TradeLicenseController::class, "getTradeLicenseById"]);
 Route::get('/v1.0/trade-license/search/{term}', [TradeLicenseController::class, "searchTradeLicense"]);
 Route::delete('/v1.0/trade-license/{id}', [TradeLicenseController::class, "deleteTradeLicense"]);
+Route::get('/v1.0/trade-license/get/invoice/{id}', [TradeLicenseController::class, "getInvoice"]);
 
 // tax payment
 Route::post('/v1.0/tax-payments', [TaxPaymentsController::class, "createTaxPayment"]);
@@ -221,6 +247,8 @@ Route::get('/v1.0/tax-payments', [TaxPaymentsController::class, "getTaxPayment"]
 Route::get('/v1.0/tax-payments/{id}', [TaxPaymentsController::class, "getTaxPaymentById"]);
 Route::get('/v1.0/tax-payments/search/{term}', [TaxPaymentsController::class, "searchTaxPayment"]);
 Route::delete('/v1.0/tax-payments/{id}', [TaxPaymentsController::class, "deleteTaxPayment"]);
+Route::get('/v1.0/tax-payments/get/invoice/{id}', [TaxPaymentsController::class, "getInvoice"]);
+
 
 // non citizen tax payment
 Route::post('/v1.0/non-citizen-tax-payments', [NonCitizenTaxPaymentController::class, "createNonCitizenTaxPayment"]);
@@ -229,6 +257,7 @@ Route::get('/v1.0/non-citizen-tax-payments', [NonCitizenTaxPaymentController::cl
 Route::get('/v1.0/non-citizen-tax-payments/{id}', [NonCitizenTaxPaymentController::class, "getNonCitizenTaxPaymentById"]);
 Route::get('/v1.0/non-citizen-tax-payments/search/{term}', [NonCitizenTaxPaymentController::class, "searchNonCitizenTaxPayment"]);
 Route::delete('/v1.0/non-citizen-tax-payments/{id}', [NonCitizenTaxPaymentController::class, "deleteNonCitizenTaxPayment"]);
+Route::get('/v1.0/non-citizen-tax-payments/get/invoice/{id}', [NonCitizenTaxPaymentController::class, "getInvoice"]);
 
 // citizen taxes
 Route::post('/v1.0/cizen-taxes', [CitizenTaxController::class, "createCitizenTax"]);
@@ -238,6 +267,9 @@ Route::get('/v1.0/cizen-taxes/{id}', [CitizenTaxController::class, "getCitizenTa
 Route::get('/v1.0/cizen-taxes/search/{term}', [CitizenTaxController::class, "searchCitizenTax"]);
 Route::delete('/v1.0/cizen-taxes/{id}', [CitizenTaxController::class, "deleteCitizenTax"]);
 
+Route::get('/v1.0/cizen-taxes/get/invoice/{id}', [CitizenTaxController::class, "getInvoice"]);
+
+
 // non citizen taxes
 Route::post('/v1.0/non-cizen-taxes', [NonCitizenTaxController::class, "createNonCitizenTax"]);
 Route::put('/v1.0/non-cizen-taxes', [NonCitizenTaxController::class, "updateNonCitizenTax"]);
@@ -245,7 +277,7 @@ Route::get('/v1.0/non-cizen-taxes', [NonCitizenTaxController::class, "getNonCiti
 Route::get('/v1.0/non-cizen-taxes/{id}', [NonCitizenTaxController::class, "getNonCitizenTaxById"]);
 Route::get('/v1.0/non-cizen-taxes/search/{term}', [NonCitizenTaxController::class, "searchNonCitizenTax"]);
 Route::delete('/v1.0/non-cizen-taxes/{id}', [NonCitizenTaxController::class, "deleteNonCitizenTax"]);
-
+Route::get('/v1.0/non-cizen-taxes/get/invoice/{id}', [NonCitizenTaxController::class, "getInvoice"]);
 
 
 

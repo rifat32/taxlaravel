@@ -39,4 +39,8 @@ class TaxPaymentsController extends Controller
     {
         return $this->deleteTaxPaymentService($id,$request);
     }
+    public function getInvoice($id,Request $request)
+    {
+        return $this->getInvoiceService($id,$request);
+    }
 }

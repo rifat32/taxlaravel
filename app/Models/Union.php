@@ -11,6 +11,11 @@ class Union extends Model
     use HasFactory, SoftDeletes;
     protected $table = "unions";
     protected $fillable = [
-        "name"
+        "name",
+        "image"
     ];
+    public function chairman()
+    {
+        return $this->hasOne(Chairman::class, 'union_id', 'id')->withTrashed();
+    }
 }

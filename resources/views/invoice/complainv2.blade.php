@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাদি প্রতিবাদীর প্রতি সমন</title>
+
+    <link href="{{asset('css/badiProtibadi.css')}}" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+    <section class="badiProtibadi-section">
+        <div class="badiProtibadi-section-left">
+            <div class="badiProtibadi-header">
+                <h2><span class="union_name">{{$result->union->name}}</span></h2>
+                <p>উপজেলাঃ {{$result->com_applicant_thn}}, জেলাঃ {{$result->com_applicant_dist}} ।</p>
+                <h2>বাদী প্রতিবাদীর প্রতি সমন</h2>
+            </div>
+
+            <div class="badiProtibadi-title">
+                <p class="badiProtibadi-title-col">
+                    কেস নং-
+                    <span>{{$result->id}}</span>
+                </p>
+                <p class="badiProtibadi-title-col">
+                    তারিখ-
+                    <span>{{$result->created_at ? \App\Http\Utils\BanglaDate::banglaNumber($result->created_at) : '' }}খ্রিঃ</span>
+                </p>
+            </div>
+
+            <div class="badiProtibadi-title">
+                <p class="badiProtibadi-title-col">বাদীঃ- {{$result->applicant_name}}</p>
+                <p class="badiProtibadi-title-col">প্রতিবাদীঃ- {{$result->defendant_name}}</p>
+            </div>
+
+
+            <div id="badiProtibadi-details">
+                <div class="badiProtibadi-details">
+                    <p>
+                        <s class="badiProtibadi-space"></s>এতদ্বারা বাদী / প্রতিবাদীকে জানানো যাচ্ছে যে, বাদীর দাখিলকৃত অভিযোগের প্রেক্ষিতে আগামী <span>{{\App\Http\Utils\BanglaDate::banglaNumber(\Carbon\Carbon::create($result->date)->format('d/m/Y')) }}</span>খ্রিঃ তারিখে
+                         {{-- রোজ<span>বুধবার</span> --}}
+                         সকাল/বিকাল <span>{{$result->time}}</span>টার সময় <span>{{$result->place}}</span>স্থানে
+                        গ্রাম আদালতের দিন ধার্য্য করা হয়েছে।</p>
+                </div>
+
+                <div class="badiProtibadi-details">
+                    <p>
+                        <s class="badiProtibadi-space"></s>সুতরাং ধার্য্য তারিখে উভয় পক্ষকে সাক্ষী ও মামলার স্বপক্ষের প্রমানাদীসহ যথা সময়ে উপস্থিত থাকার জন্য বলা হল।</p>
+                </div>
+            </div>
+
+            <div class="badiProtibadi-signature">
+
+                <p>
+                    <img style="display: block; margin-left:auto"  src="{{Request::root()}}/{{$result->chairman->sign_image}}" width="100" style="display: block"/>
+                    চেয়ারম্যান</p>
+            </div>
+        </div>
+        <div  class="instructions">
+            <h3>নির্দেশনাবলী:</h3>
+            <p>
+                ১)
+                সার্টিফিকেট টি online  এ verification এর জন্য পেজ https//euptax.com এ আসুন এবং সনদ নং ও মোবাইল নাম্বার দিয়ে অনুসন্ধান করুন | অথবা আপনার smart  phone  থেকে QR code টি Scan করুন |
+            </p>
+            <p>
+                ২)
+                যেকোনো ধরণের তথ্য নেয়ার জন্য ফোন করুন অথবা ইমেইল করুন |
+            </p>
+
+        </div>
+
+    </section>
+</body>
+<script type="text/javascript">
+    window.onload = function() { window.print(); }
+  </script>
+</html>
