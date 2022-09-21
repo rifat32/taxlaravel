@@ -49,9 +49,25 @@ trait NonCitizenTaxService
     {
 
         try{
-            $data['data'] =   NonCitizenTax::with("union","noncitizen","ward")
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   NonCitizenTax::with("union","noncitizen","ward")
+                ->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   NonCitizenTax::with("union","noncitizen","ward")
+
+            ->where([
+                "union_id" =>$request->user()->union_id
+            ])
             ->latest()
             ->paginate(10);
+
+
+                 }
+
+
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -71,6 +87,9 @@ trait NonCitizenTaxService
     public function searchNonCitizenTaxService($term,$request)
     {
         try{
+
+
+        if($request->user()->hasRole("superadmin")){
             $data['data'] =   NonCitizenTax::with("union","noncitizen","ward")
             ->leftJoin('non_holding_citizens', 'non_citizen_taxes.non_citizen_id', '=', 'non_holding_citizens.id')
             ->where(
@@ -82,6 +101,28 @@ trait NonCitizenTaxService
             ->select("non_citizen_taxes.*")
             ->latest()
         ->paginate(10);
+             } else {
+                $data['data'] =   NonCitizenTax::with("union","noncitizen","ward")
+            ->leftJoin('non_holding_citizens', 'non_citizen_taxes.non_citizen_id', '=', 'non_holding_citizens.id')
+
+            ->where(function($query) use($term){
+                $query  ->where(
+                    "non_holding_citizens.nid","like","%".$term."%"
+                )
+                ->orWhere(
+                    "non_holding_citizens.mobile","like","%".$term."%"
+                );
+            })
+            ->select("non_citizen_taxes.*")
+            ->where([
+                "union_id" =>$request->user()->union_id
+            ])
+            ->latest()
+        ->paginate(10);
+
+
+
+             }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

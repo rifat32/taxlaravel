@@ -51,7 +51,15 @@ trait HouseStructureService
     {
 
         try{
-            $data['data'] =   HouseStructure::with("union")->paginate(10);
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   HouseStructure::with("union")->paginate(10);
+                 } else {
+                    $data['data'] =   HouseStructure::with("union")->where([
+                        "union_id" =>$request->user()->union_id
+                    ])->paginate(10);
+
+                 }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -82,9 +90,23 @@ trait HouseStructureService
     public function searchHouseStructureService($term,$request)
     {
         try{
+
+        if($request->user()->hasRole("superadmin")){
             $data['data'] =   HouseStructure::with("union")
-        ->where("name","like","%".$term."%")
+            ->where("name","like","%".$term."%")
+            ->get();
+             } else {
+                $data['data'] =   HouseStructure::with("union")
+                ->where("name","like","%".$term."%")
+               ->where([
+            "union_id" =>$request->user()->union_id
+        ])
         ->get();
+
+
+
+
+             }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

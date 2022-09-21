@@ -169,7 +169,20 @@ trait ServiceService
     {
 
         try {
-            $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")->latest()->paginate(10);
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")->latest()->paginate(10);
+                 } else {
+                    $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")->where([
+                        "union_id" =>$request->user()->union_id
+                     ])->latest()->paginate(10);
+
+
+
+
+
+
+                 }
+
             return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);
@@ -209,15 +222,39 @@ trait ServiceService
     public function searchServiceService($term, $request)
     {
         try {
-            $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")
-                ->where("applicant_holding_no", "like", "%" . $term . "%")
-                ->orWhere("applicant_name_en", "like", "%" . $term . "%")
-                ->orWhere("applicant_name", "like", "%" . $term . "%")
-                ->orWhere("applicant_nid", "like", "%" . $term . "%")
-                ->orWhere("applicant_phone", "like", "%" . $term . "%")
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")
 
+                ->where(function($query) use($term){
+                    $query    ->where("applicant_holding_no", "like", "%" . $term . "%")
+                    ->orWhere("applicant_name_en", "like", "%" . $term . "%")
+                    ->orWhere("applicant_name", "like", "%" . $term . "%")
+                    ->orWhere("applicant_nid", "like", "%" . $term . "%")
+                    ->orWhere("applicant_phone", "like", "%" . $term . "%");
+                })
                 ->latest()
                 ->paginate(10);
+                 } else {
+                    $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")
+                    ->where([
+                        "union_id" =>$request->user()->union_id
+                     ])
+                    ->where(function($query) use($term){
+                        $query    ->where("applicant_holding_no", "like", "%" . $term . "%")
+                        ->orWhere("applicant_name_en", "like", "%" . $term . "%")
+                        ->orWhere("applicant_name", "like", "%" . $term . "%")
+                        ->orWhere("applicant_nid", "like", "%" . $term . "%")
+                        ->orWhere("applicant_phone", "like", "%" . $term . "%");
+                    })
+                    ->latest()
+                    ->paginate(10);
+
+
+
+
+
+                 }
+
             return response()->json($data, 200);
         } catch (Exception $e) {
             return $this->sendError($e, 500);

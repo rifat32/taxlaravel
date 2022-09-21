@@ -102,15 +102,19 @@ trait CitizenTaxService
                  } else {
                     $data['data'] =   CitizenTax::with("union","citizen","ward")
                     ->leftJoin('citizens', 'citizen_taxes.citizen_id', '=', 'citizens.id')
-                    ->where(
-                        "citizens.mobile","like","%".$term."%"
-                    )
                     ->where([
                         "union_id" =>$request->user()->union_id
                     ])
-                    ->orWhere(
-                        "citizens.nid_no","like","%".$term."%"
-                    )
+                    ->where(function($query) use($term){
+                        $query->where(
+                            "citizens.mobile","like","%".$term."%"
+                        )
+
+                        ->orWhere(
+                            "citizens.nid_no","like","%".$term."%"
+                        );
+                    })
+
                     ->select("citizen_taxes.*")
                     ->latest()
                     ->paginate(10);

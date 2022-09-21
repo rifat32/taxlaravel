@@ -44,7 +44,15 @@ trait PostOfficeService
     {
 
         try{
-            $data['data'] =   PostOffice::with("ward.union")->paginate(10);
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   PostOffice::with("ward.union")->paginate(10);
+                 } else {
+                    $data['data'] = PostOffice::with("ward.union")->where([
+                        "union_id" =>$request->user()->union_id
+                     ])->paginate(10);
+
+                 }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -56,7 +64,16 @@ trait PostOfficeService
     {
 
         try{
-            $data['data'] =   PostOffice::where(["ward_id" => $wardId])->get();
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   PostOffice::where(["ward_id" => $wardId])->get();
+                 } else {
+                    $data['data'] =   PostOffice::where(["ward_id" => $wardId])->where([
+                        "union_id" =>$request->user()->union_id
+                     ])->get();
+
+
+                 }
+
             return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -75,9 +92,19 @@ trait PostOfficeService
     public function searchPostOfficeService($term,$request)
     {
         try{
+
+        if($request->user()->hasRole("superadmin")){
             $data['data'] =   PostOffice::with("union","ward")
-        ->where("name","like","%".$term."%")
-        ->get();
+            ->where("name","like","%".$term."%")
+            ->get();
+             } else {
+                $data['data'] =   PostOffice::with("union","ward")
+                ->where("name","like","%".$term."%")
+                ->where([
+                    "union_id" =>$request->user()->union_id
+                 ])
+                ->get();
+             }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

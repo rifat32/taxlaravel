@@ -66,9 +66,20 @@ trait NonHoldingCitizenService
     {
 
         try{
-            $data['data'] =   NonHoldingCitizen::with("union","ward","village","postOffice","upazila","district")
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   NonHoldingCitizen::with("union","ward","village","postOffice","upazila","district")
+                ->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   NonHoldingCitizen::with("union","ward","village","postOffice","upazila","district")
+            ->where([
+                "union_id" =>$request->user()->union_id
+             ])
             ->latest()
             ->paginate(10);
+
+                 }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -109,16 +120,41 @@ trait NonHoldingCitizenService
     public function searchCitizenService($term,$request)
     {
         try{
+
+
+        if($request->user()->hasRole("superadmin")){
             $data['data'] =   NonHoldingCitizen::with("union","ward","village","postOffice","upazila","district")
-        ->where("institute_name","like","%".$term."%")
-        ->orWhere("business_address","like","%".$term."%")
-        ->orWhere("license_no","like","%".$term."%")
-        ->orWhere("license_user_name","like","%".$term."%")
-        ->orWhere("guardian","like","%".$term."%")
-        ->orWhere("nid","like","%".$term."%")
-        ->orWhere("mobile","like","%".$term."%")
+            ->where("institute_name","like","%".$term."%")
+            ->orWhere("business_address","like","%".$term."%")
+            ->orWhere("license_no","like","%".$term."%")
+            ->orWhere("license_user_name","like","%".$term."%")
+            ->orWhere("guardian","like","%".$term."%")
+            ->orWhere("nid","like","%".$term."%")
+            ->orWhere("mobile","like","%".$term."%")
+            ->latest()
+            ->paginate(10);
+             } else {
+                $data['data'] =   NonHoldingCitizen::with("union","ward","village","postOffice","upazila","district")
+                ->where(function($query) use($term){
+                    $query    ->where("institute_name","like","%".$term."%")
+                    ->orWhere("business_address","like","%".$term."%")
+                    ->orWhere("license_no","like","%".$term."%")
+                    ->orWhere("license_user_name","like","%".$term."%")
+                    ->orWhere("guardian","like","%".$term."%")
+                    ->orWhere("nid","like","%".$term."%")
+                    ->orWhere("mobile","like","%".$term."%");
+                })
+
+        ->where([
+            "union_id" =>$request->user()->union_id
+        ])
         ->latest()
         ->paginate(10);
+
+
+
+             }
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

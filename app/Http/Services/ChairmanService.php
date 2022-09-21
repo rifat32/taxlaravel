@@ -111,10 +111,13 @@ trait ChairmanService
 
         if($request->user()->hasRole("superadmin")){
             $data['data'] =   Chairman::with("union")
-        ->where("name","like","%".$term."%")
-        ->orWhere("nid","like","%".$term."%")
-        ->orWhere("mobile","like","%".$term."%")
-        ->orWhere("address","like","%".$term."%")
+            ->where(function($query) use($term){
+                $query->where("name","like","%".$term."%")
+                ->orWhere("nid","like","%".$term."%")
+                ->orWhere("mobile","like","%".$term."%")
+                ->orWhere("address","like","%".$term."%");
+            })
+
         ->latest()
         ->paginate(10);
         } else {
@@ -122,10 +125,13 @@ trait ChairmanService
             ->where([
                 "union_id" =>$request->user()->union_id
             ])
-            ->where("name","like","%".$term."%")
-            ->orWhere("nid","like","%".$term."%")
-            ->orWhere("mobile","like","%".$term."%")
-            ->orWhere("address","like","%".$term."%")
+            ->where(function($query) use($term){
+                $query->where("name","like","%".$term."%")
+                ->orWhere("nid","like","%".$term."%")
+                ->orWhere("mobile","like","%".$term."%")
+                ->orWhere("address","like","%".$term."%");
+            })
+
             ->latest()
             ->paginate(10);
 

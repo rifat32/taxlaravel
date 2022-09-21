@@ -206,14 +206,17 @@ trait CitizenService
                 if($request->user()->hasRole("superadmin")){
 
                    $data['data'] =   Citizen::with("union", "ward", "village", "postOffice", "upazila", "district")
-                ->where("holding_no", "like", "%" . $term . "%")
-                ->orWhere("thana_head_name", "like", "%" . $term . "%")
-                ->orWhere("thana_head_religion", "like", "%" . $term . "%")
-                ->orWhere("thana_head_occupation", "like", "%" . $term . "%")
-                ->orWhere("mobile", "like", "%" . $term . "%")
-                ->orWhere("c_mother_name", "like", "%" . $term . "%")
-                ->orWhere("guardian", "like", "%" . $term . "%")
-                ->orWhere("nid_no", "like", "%" . $term . "%")
+                   ->where(function($query) use($term){
+                    $query->where("holding_no", "like", "%" . $term . "%")
+                    ->orWhere("thana_head_name", "like", "%" . $term . "%")
+                    ->orWhere("thana_head_religion", "like", "%" . $term . "%")
+                    ->orWhere("thana_head_occupation", "like", "%" . $term . "%")
+                    ->orWhere("mobile", "like", "%" . $term . "%")
+                    ->orWhere("c_mother_name", "like", "%" . $term . "%")
+                    ->orWhere("guardian", "like", "%" . $term . "%")
+                    ->orWhere("nid_no", "like", "%" . $term . "%");
+                })
+
                 ->latest()
                 ->paginate(10);
                     } else {
@@ -222,13 +225,16 @@ trait CitizenService
                 ->where([
                     "union_id" =>$request->user()->union_id
                 ])
-                ->orWhere("thana_head_name", "like", "%" . $term . "%")
-                ->orWhere("thana_head_religion", "like", "%" . $term . "%")
-                ->orWhere("thana_head_occupation", "like", "%" . $term . "%")
-                ->orWhere("mobile", "like", "%" . $term . "%")
-                ->orWhere("c_mother_name", "like", "%" . $term . "%")
-                ->orWhere("guardian", "like", "%" . $term . "%")
-                ->orWhere("nid_no", "like", "%" . $term . "%")
+                ->where(function($query) use($term){
+                    $query->where("holding_no", "like", "%" . $term . "%")
+                    ->orWhere("thana_head_name", "like", "%" . $term . "%")
+                    ->orWhere("thana_head_religion", "like", "%" . $term . "%")
+                    ->orWhere("thana_head_occupation", "like", "%" . $term . "%")
+                    ->orWhere("mobile", "like", "%" . $term . "%")
+                    ->orWhere("c_mother_name", "like", "%" . $term . "%")
+                    ->orWhere("guardian", "like", "%" . $term . "%")
+                    ->orWhere("nid_no", "like", "%" . $term . "%");
+                })
                 ->latest()
                 ->paginate(10);
 

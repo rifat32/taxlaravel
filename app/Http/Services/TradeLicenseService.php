@@ -49,8 +49,19 @@ trait TradeLicenseService
     {
 
         try{
-            $data['data'] =   TradeLicense::with("union","ward") ->latest()
-            ->paginate(10);
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   TradeLicense::with("union","ward") ->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   TradeLicense::with("union","ward")->where([
+                        "union_id" =>$request->user()->union_id
+                     ]) ->latest()
+                    ->paginate(10);
+
+
+
+                 }
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -70,16 +81,44 @@ trait TradeLicenseService
     public function searchTradeLicenseService($term,$request)
     {
         try{
-            $data['data'] =   TradeLicense::with("union","ward")
-        ->where("institute","like","%".$term."%")
-        ->orWhere("owner","like","%".$term."%")
-        ->orWhere("guadian","like","%".$term."%")
-        ->orWhere("license_no","like","%".$term."%")
-        ->orWhere("mobile_no","like","%".$term."%")
-        ->orWhere("nid","like","%".$term."%")
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   TradeLicense::with("union","ward")
+
+                ->where(function($query) use($term){
+                    $query    ->where("institute","like","%".$term."%")
+                    ->orWhere("owner","like","%".$term."%")
+                    ->orWhere("guadian","like","%".$term."%")
+                    ->orWhere("license_no","like","%".$term."%")
+                    ->orWhere("mobile_no","like","%".$term."%")
+                    ->orWhere("nid","like","%".$term."%");
+                })
+
+
+
+                ->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   TradeLicense::with("union","ward")
+                    ->where([
+                        "union_id" =>$request->user()->union_id
+                     ])
+                     ->where(function($query) use($term){
+                        $query    ->where("institute","like","%".$term."%")
+                        ->orWhere("owner","like","%".$term."%")
+                        ->orWhere("guadian","like","%".$term."%")
+                        ->orWhere("license_no","like","%".$term."%")
+                        ->orWhere("mobile_no","like","%".$term."%")
+                        ->orWhere("nid","like","%".$term."%");
+                    })
 
         ->latest()
         ->paginate(10);
+
+
+
+
+                 }
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);

@@ -49,8 +49,17 @@ trait TaxPaymentService
     {
 
         try{
-            $data['data'] =   TaxPayment::with("union","citizen","method")->latest()
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   TaxPayment::with("union","citizen","method")->latest()
             ->paginate(10);
+                 } else {
+                    $data['data'] =   TaxPayment::with("union","citizen","method") ->where([
+                        "union_id" =>$request->user()->union_id
+                     ])->latest()
+                    ->paginate(10);
+
+                 }
+
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -70,17 +79,40 @@ trait TaxPaymentService
     public function searchTaxPaymentService($term,$request)
     {
         try{
-            $data['data'] =   TaxPayment::with("union","citizen","method")
-            ->leftJoin('citizens', 'tax_payments.citizen_id', '=', 'citizens.id')
-            ->where(
-                "citizens.mobile","like","%".$term."%"
-            )
-            ->orWhere(
-                "citizens.nid_no","like","%".$term."%"
-            )
-            ->select("tax_payments.*")
-            ->latest()
-            ->paginate(10);
+
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   TaxPayment::with("union","citizen","method")
+                ->leftJoin('citizens', 'tax_payments.citizen_id', '=', 'citizens.id')
+                ->where(function($query) use($term){
+                    $query    ->where(
+                        "citizens.mobile","like","%".$term."%"
+                    )
+                    ->orWhere(
+                        "citizens.nid_no","like","%".$term."%"
+                    );
+                })
+
+                ->select("tax_payments.*")
+                ->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   TaxPayment::with("union","citizen","method")
+                    ->leftJoin('citizens', 'tax_payments.citizen_id', '=', 'citizens.id')
+                    ->where([
+                        "union_id" =>$request->user()->union_id
+                     ])
+                    ->where(
+                        "citizens.mobile","like","%".$term."%"
+                    )
+                    ->orWhere(
+                        "citizens.nid_no","like","%".$term."%"
+                    )
+                    ->select("tax_payments.*")
+                    ->latest()
+                    ->paginate(10);
+
+
+                 }
         return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
