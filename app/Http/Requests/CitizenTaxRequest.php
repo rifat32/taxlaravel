@@ -24,6 +24,7 @@ class CitizenTaxRequest extends FormRequest
     public function rules()
     {
         return [
+            "holding_no" => "required",
             "note" => "required",
             "amount" => "required|numeric",
             "current_year" => "required",

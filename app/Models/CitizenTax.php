@@ -14,7 +14,8 @@ class CitizenTax extends Model
         "current_year",
         "union_id",
         "citizen_id",
-        "ward_id"
+        "ward_id",
+        "holding_no",
      ];
      protected $casts = [
          'union_id' => 'integer',
