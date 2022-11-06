@@ -29,7 +29,8 @@ class NonCitizenTaxRequest extends FormRequest
             "current_year" => "required",
             "union_id" => "required|numeric",
             "non_citizen_id" => "required|numeric",
-            "ward_id" => "required|numeric"
+            "ward_id" => "required|numeric",
+            "holding_no" => "required",
         ];
     }
 }

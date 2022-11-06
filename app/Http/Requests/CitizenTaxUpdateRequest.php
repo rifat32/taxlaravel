@@ -29,7 +29,8 @@ class CitizenTaxUpdateRequest extends FormRequest
             "current_year" => "required",
             "union_id" => "required|numeric",
             "citizen_id" => "required|numeric",
-            "ward_id" => "required|numeric"
+            "ward_id" => "required|numeric",
+            "holding_no" => "required",
         ];
     }
 }

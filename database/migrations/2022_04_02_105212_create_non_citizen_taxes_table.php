@@ -18,8 +18,8 @@ class CreateNonCitizenTaxesTable extends Migration
             $table->string("note");
             $table->float("amount");
             $table->string("current_year");
-
-
+            $table->string("holding_no");
+           
             $table->unsignedBigInteger("union_id");
             $table->unsignedBigInteger("non_citizen_id");
             $table->unsignedBigInteger("ward_id");

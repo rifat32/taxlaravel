@@ -14,7 +14,8 @@ class NonCitizenTax extends Model
         "current_year",
         "union_id",
         "non_citizen_id",
-        "ward_id"
+        "ward_id",
+        "holding_no",
      ];
      protected $casts = [
          'union_id' => 'integer',
