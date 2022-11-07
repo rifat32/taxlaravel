@@ -21,7 +21,7 @@ class CreateCitizenTaxesTable extends Migration
             $table->string("holding_no");
 
             $table->unsignedBigInteger("union_id");
-            $table->unsignedBigInteger("citizen_id");
+            $table->unsignedBigInteger("citizen_id")->nullable();
             $table->unsignedBigInteger("ward_id");
 
 

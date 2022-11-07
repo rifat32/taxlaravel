@@ -29,7 +29,7 @@ class CitizenTaxRequest extends FormRequest
             "amount" => "required|numeric",
             "current_year" => "required",
             "union_id" => "required|numeric",
-            "citizen_id" => "required|numeric",
+            "citizen_id" => "nullable",
             "ward_id" => "required|numeric"
         ];
     }
