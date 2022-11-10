@@ -36,7 +36,7 @@ trait TaxPaymentService
             $data['data'] = tap(TaxPayment::where(["id" =>  $request["id"]]))->update(
                 $updatableData
             )
-            ->with("union","citizen","method")
+            ->with("union","citizen","method","ward")
             ->first();
             return response()->json($data, 200);
         } catch(Exception $e){
@@ -50,10 +50,10 @@ trait TaxPaymentService
 
         try{
             if($request->user()->hasRole("superadmin")){
-                $data['data'] =   TaxPayment::with("union","citizen","method")->latest()
+                $data['data'] =   TaxPayment::with("union","citizen","method","ward")->latest()
             ->paginate(10);
                  } else {
-                    $data['data'] =   TaxPayment::with("union","citizen","method") ->where([
+                    $data['data'] =   TaxPayment::with("union","citizen","method","ward") ->where([
                         "union_id" =>$request->user()->union_id
                      ])->latest()
                     ->paginate(10);
@@ -70,7 +70,7 @@ trait TaxPaymentService
     {
 
         try{
-            $data['data'] =   TaxPayment::with("union","citizen","method")->where(["id" => $id])->first();
+            $data['data'] =   TaxPayment::with("union","citizen","method","ward")->where(["id" => $id])->first();
             return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -81,7 +81,7 @@ trait TaxPaymentService
         try{
 
             if($request->user()->hasRole("superadmin")){
-                $data['data'] =   TaxPayment::with("union","citizen","method")
+                $data['data'] =   TaxPayment::with("union","citizen","method","ward")
                 ->leftJoin('citizens', 'tax_payments.citizen_id', '=', 'citizens.id')
                 ->where(function($query) use($term){
                     $query    ->where(
@@ -96,7 +96,7 @@ trait TaxPaymentService
                 ->latest()
                 ->paginate(10);
                  } else {
-                    $data['data'] =   TaxPayment::with("union","citizen","method")
+                    $data['data'] =   TaxPayment::with("union","citizen","method","ward")
                     ->leftJoin('citizens', 'tax_payments.citizen_id', '=', 'citizens.id')
                     ->where([
                         "union_id" =>$request->user()->union_id
@@ -134,7 +134,7 @@ trait TaxPaymentService
     public function getInvoiceService($id, $request)
     {
         try {
-            $result=TaxPayment::with('citizen','method','citizen.union','citizen.ward','citizen.village','citizen.district','citizen.upazila','citizen.postoffice')
+            $result=TaxPayment::with('citizen','method','citizen.union','citizen.ward','citizen.village','citizen.district','citizen.upazila','citizen.postoffice',"ward")
             ->find($id);
 
 

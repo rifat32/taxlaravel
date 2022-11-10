@@ -36,7 +36,7 @@ trait NonCitizenTaxPaymentService
             $data['data'] = tap(NonCitizenTaxPayment::where(["id" =>  $request["id"]]))->update(
                 $updatableData
             )
-            ->with("union","noncitizen","method")
+            ->with("union","noncitizen","method","ward")
             ->first();
             return response()->json($data, 200);
         } catch(Exception $e){
@@ -51,9 +51,9 @@ trait NonCitizenTaxPaymentService
         try{
 
             if($request->user()->hasRole("superadmin")){
-                $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method")->paginate(10);
+                $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method","ward")->paginate(10);
                  } else {
-                    $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method")->where([
+                    $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method","ward")->where([
                         "union_id" =>$request->user()->union_id
                     ])->paginate(10);
 
@@ -69,7 +69,7 @@ trait NonCitizenTaxPaymentService
     {
 
         try{
-            $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method")->where(["id" => $id])->first();
+            $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method","ward")->where(["id" => $id])->first();
             return response()->json($data, 200);
         } catch(Exception $e){
         return $this->sendError($e,500);
@@ -81,7 +81,7 @@ trait NonCitizenTaxPaymentService
 
 
         if($request->user()->hasRole("superadmin")){
-            $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method")
+            $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method","ward")
             ->leftJoin('non_holding_citizens', 'non_citizen_tax_payments.non_citizen_id', '=', 'non_holding_citizens.id')
             ->where(
                 "non_holding_citizens.nid","like","%".$term."%"
@@ -93,7 +93,7 @@ trait NonCitizenTaxPaymentService
             ->latest()
         ->paginate(10);
              } else {
-                $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method")
+                $data['data'] =   NonCitizenTaxPayment::with("union","noncitizen","method","ward")
                 ->leftJoin('non_holding_citizens', 'non_citizen_tax_payments.non_citizen_id', '=', 'non_holding_citizens.id')
                 ->where(function($query) use($term){
                     $query ->where(
@@ -139,7 +139,7 @@ trait NonCitizenTaxPaymentService
     public function getInvoiceService($id, $request)
     {
         try {
-            $result=NonCitizenTaxPayment::with('union','noncitizen')
+            $result=NonCitizenTaxPayment::with('union','noncitizen',"ward")
             ->find($id);
 
 

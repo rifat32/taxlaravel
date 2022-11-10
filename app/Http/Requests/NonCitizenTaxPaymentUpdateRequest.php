@@ -29,6 +29,8 @@ class NonCitizenTaxPaymentUpdateRequest extends FormRequest
             "due" => "required|numeric",
             "current_year" => "required",
             "union_id" => "required|numeric",
+            "ward_id" => "required|numeric",
+            "non_holding_no" => "required",
             "non_citizen_id" => "required|numeric",
             "method_id" => "required|numeric"
         ];

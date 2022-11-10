@@ -16,7 +16,9 @@ class TaxPayment extends Model
         "current_year",
         "union_id",
         "citizen_id",
-        "method_id"
+        "method_id",
+        "ward_id",
+        "holding_no",
      ];
      protected $casts = [
          'union_id' => 'integer',
@@ -26,6 +28,10 @@ class TaxPayment extends Model
      public function union()
      {
          return $this->hasOne(Union::class, 'id', 'union_id')->withTrashed();
+     }
+     public function ward()
+     {
+         return $this->hasOne(Ward::class, 'id', 'ward_id')->withTrashed();
      }
      public function citizen()
      {

@@ -19,10 +19,12 @@ class CreateTaxPaymentsTable extends Migration
             $table->date("payment_for");
             $table->float("amount");
             $table->string("current_year");
-
+            $table->string("holding_no");
             $table->unsignedBigInteger("union_id");
+            $table->unsignedBigInteger("ward_id");
             $table->unsignedBigInteger("citizen_id");
             $table->unsignedBigInteger("method_id");
+
 
 
             $table->foreign('union_id')->references('id')->on('unions')->onDelete('cascade');

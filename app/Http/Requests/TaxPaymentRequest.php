@@ -28,6 +28,8 @@ class TaxPaymentRequest extends FormRequest
             "amount" => "required|numeric",
             "current_year" => "required",
             "union_id" => "required|numeric",
+            "ward_id" => "required|numeric",
+            "holding_no" => "required",
             "citizen_id" => "required|numeric",
             "method_id" => "required|numeric"
         ];

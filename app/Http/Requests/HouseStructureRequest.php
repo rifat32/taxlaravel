@@ -28,7 +28,6 @@ class HouseStructureRequest extends FormRequest
          "strong_house_tax"=>"required|numeric",
          "half_strong_house_tax"=>"required|numeric",
          "weak_house_tax"=>"required|numeric",
-
          "strong_house_yearly_tax"=>"required|numeric",
          "half_strong_yearly_tax"=>"required|numeric",
          "weak_house_yearly_tax"=>"required|numeric",

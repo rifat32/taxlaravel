@@ -16,7 +16,9 @@ class NonCitizenTaxPayment extends Model
         "current_year",
         "union_id",
         "non_citizen_id",
-        "method_id"
+        "method_id",
+        "non_holding_no",
+        "ward_id"
      ];
      protected $casts = [
          'union_id' => 'integer',
@@ -26,6 +28,10 @@ class NonCitizenTaxPayment extends Model
      public function union()
      {
          return $this->hasOne(Union::class, 'id', 'union_id')->withTrashed();
+     }
+     public function ward()
+     {
+         return $this->hasOne(Ward::class, 'id', 'ward_id')->withTrashed();
      }
      public function noncitizen()
      {

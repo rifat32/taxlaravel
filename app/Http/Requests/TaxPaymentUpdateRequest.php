@@ -29,7 +29,9 @@ class TaxPaymentUpdateRequest extends FormRequest
             "current_year" => "required",
             "union_id" => "required",
             "citizen_id" => "required",
-            "method_id" => "required"
+            "method_id" => "required",
+            "ward_id" => "required|numeric",
+            "holding_no" => "required",
         ];
     }
 }
