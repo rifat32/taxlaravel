@@ -185,6 +185,13 @@ Route::put('/v1.0/services', [ServiceController::class, "updateService"]);
 Route::get('/v1.0/services', [ServiceController::class, "getService"]);
 Route::get('/v1.0/services/{id}', [ServiceController::class, "getServiceById"]);
 Route::get('/v1.0/services/search/{term}', [ServiceController::class, "searchService"]);
+Route::get('/v1.0/services/search/status/{term}', [ServiceController::class, "searchServiceByStatus"]);
+
+
+Route::post('/v1.0/services/change/status', [ServiceController::class, "changeStatus"]);
+
+
+
 Route::delete('/v1.0/services/{id}', [ServiceController::class, "deleteService"]);
  Route::get('/v1.0/services/get/invoice/{id}', [ServiceController::class, "getInvoice"]);
 

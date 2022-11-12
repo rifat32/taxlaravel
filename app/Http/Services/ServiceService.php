@@ -219,6 +219,58 @@ trait ServiceService
         }
     }
 
+    public function changeStatusServiceService( $request)
+    {
+        try {
+            Service::where([
+                "id" => $request->id
+               ])
+               ->update([
+                   "status" => $request->status
+               ]);
+               return response()->json("status changed", 200);
+
+
+
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
+
+
+    public function searchByStatusServiceService($term, $request)
+    {
+        try {
+            if($request->user()->hasRole("superadmin")){
+                $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")
+                ->where([
+                    "status" => $term
+                ])
+
+                ->latest()
+                ->paginate(10);
+                 } else {
+                    $data['data'] =   Service::with("union", "ward", "village", "postOffice", "upazila", "district")
+                    ->where([
+                        "union_id" =>$request->user()->union_id
+                     ])
+                     ->where([
+                        "status" => $term
+                    ])
+                    ->latest()
+                    ->paginate(10);
+
+
+
+
+
+                 }
+
+            return response()->json($data, 200);
+        } catch (Exception $e) {
+            return $this->sendError($e, 500);
+        }
+    }
     public function searchServiceService($term, $request)
     {
         try {

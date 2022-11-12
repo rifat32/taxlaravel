@@ -34,7 +34,7 @@ class CreateServicesTable extends Migration
             $table->string("applicant_email")->nullable();
             $table->string("applicant_img")->nullable();
             $table->string("apply_types")->nullable();
-            $table->string("status")->nullable();
+            $table->string("status")->default("pending");
             $table->string("trade_id")->nullable();
             $table->string("death_day")->nullable();
 
