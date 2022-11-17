@@ -15,7 +15,7 @@ class UnionController extends Controller
         return $this->createUnionService($request);
     }
 
-    public function updateUnion(Request $request)
+    public function updateUnion(UnionRequest $request)
     {
         return $this->updateUnionService($request);
     }
